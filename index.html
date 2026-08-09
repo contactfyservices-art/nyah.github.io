@@ -556,8 +556,12 @@
     .section{ padding: 0 5vw; }
     .section-head{ margin: 56px 0 24px; }
     .section-head h2{ font-size: clamp(20px, 6vw, 26px); }
-    .flex-wrap{ padding: 40px 5vw 0; gap:26px; }
-    .flex-badge{ font-size:11.5px; padding:8px 16px 8px 14px; top:14px; }
+    .flex-wrap{ padding: 34px 5vw 0; gap:20px; flex-direction:column; align-items:stretch; }
+    .flex-badge{ position:static; display:inline-flex; margin: 0 0 6px; font-size:11.5px; padding:8px 16px 8px 16px; border-radius:999px; }
+    .flex-text{ order:1; width:100%; max-width:100%; min-width:0; }
+    .flex-visual{ order:2; width:100%; min-width:0; margin-top:8px; }
+    .flex-social{ order:3; flex-direction:row; justify-content:center; gap:14px; padding-top:4px; margin-top:4px; }
+    .device-stage{ min-height:260px; }
     .flex-text h1{ font-size: clamp(26px, 8vw, 34px); }
     .flex-text p{ font-size:14.5px; }
     .hero-stats{ grid-template-columns: repeat(2, 1fr); }
@@ -696,11 +700,10 @@
 
 <section class="section reveal" id="apropos">
   <div class="glass about" style="padding:28px;">
-    <div class="photo-frame"><div class="pf-inner"><img src="images/fy-portrait.jpg" alt="Fy Andrianantenaina" /></div></div>
+    <div class="photo-frame"><div class="pf-inner"><img src="images/fy-style-2.jpg" alt="Fy Andrianantenaina" style="object-position:center 12%;" /></div></div>
     <div>
       <h3 data-fr="Fy Andrianantenaina — IT Programmeur" data-en="Fy Andrianantenaina — IT Programmer">Bonjour, je suis <span class="highlight-word">Fy</span> — IT Programmeur</h3>
       <p data-fr="Basé à Moramanga, je conçois et développe vos logiciels et applications, du cahier des charges jusqu'à la mise en service." data-en="Based in Moramanga, I design and build your software and apps, from requirements to deployment.">Basé à Moramanga, je conçois et développe vos logiciels et applications, du cahier des charges jusqu'à la mise en service.</p>
-      <img src="images/idea-innovation.jpg" alt="Idée & innovation" style="width:120px; border-radius:12px; margin-top:16px; opacity:0.92;" />
     </div>
   </div>
 </section>
@@ -809,7 +812,7 @@
       <p data-fr="Style urbain" data-en="Urban style">Style urbain</p>
     </div>
     <div class="glass gallery-card reveal">
-      <div class="photo-frame"><div class="pf-inner"><img src="images/fy-style-2.jpg" alt="Fy Andrianantenaina — tenue casual" /></div></div>
+      <div class="photo-frame"><div class="pf-inner"><img src="images/fy-style-2.jpg" alt="Fy Andrianantenaina — tenue casual" style="object-position:center top;" /></div></div>
       <p data-fr="Tenue casual" data-en="Casual outfit">Tenue casual</p>
     </div>
   </div>
