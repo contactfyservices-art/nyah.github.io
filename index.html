@@ -6,6 +6,7 @@
 <title>Nyah — Fy ANDRIANANTENAINA, IT Programmeur</title>
 <meta name="description" content="Fy ANDRIANANTENAINA, IT Programmeur — applications, logiciels et sites web sur mesure." />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   :root{
     --bg-1: #0b0e17;
@@ -212,6 +213,87 @@
   .about h3{ font-size:19px; margin-bottom:8px; }
   .about p{ color: var(--text-dim); font-size:14.5px; max-width:48ch; }
   @media (max-width:640px){ .about{ justify-content:center; text-align:center; } }
+
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+
+  .project{ grid-template-columns: 1fr auto auto; }
+  @media (max-width: 640px){ .project{ grid-template-columns: 1fr; } }
+  .like-btn{
+    display:flex; align-items:center; gap:7px; padding:10px 16px; border-radius:999px;
+    border:1px solid var(--glass-border); background: var(--glass); color: var(--text);
+    cursor:pointer; font-size:13.5px; font-weight:600; transition: all .2s ease; font-family:'Inter',sans-serif;
+  }
+  .like-btn:hover{ border-color: var(--neon-pink); }
+  .like-btn.liked{ background: rgba(255,46,224,0.12); border-color: var(--neon-pink); color: var(--neon-pink); }
+  .like-btn .heart{ transition: transform .25s ease; }
+  .like-btn.liked .heart{ transform: scale(1.25); }
+
+  .testimonials{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:18px; }
+  .testimonial{ padding:24px; }
+  .testimonial p{ font-size:14.5px; color: var(--text); margin-bottom:16px; }
+  .testimonial p::before{ content:"“"; color: var(--accent); font-size:22px; }
+  .testimonial-author{ display:flex; align-items:center; gap:10px; }
+  .testimonial-avatar{ width:36px; height:36px; border-radius:50%; background: linear-gradient(135deg, var(--accent), var(--accent-3)); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#0b0e17; flex-shrink:0; }
+  .testimonial-name{ font-size:13.5px; font-weight:600; }
+  .testimonial-role{ font-size:12px; color: var(--text-dim); }
+
+  .card-wrap{ display:flex; gap:36px; flex-wrap:wrap; align-items:flex-start; justify-content:center; }
+  .biz-card{
+    width:340px; border-radius:22px; padding:28px 24px; position:relative; overflow:hidden;
+    background: linear-gradient(150deg, rgba(124,158,255,0.18), rgba(111,214,176,0.10)), var(--glass);
+    border:1px solid var(--glass-border);
+  }
+  .biz-top{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+  .biz-top img{ width:52px; height:52px; border-radius:14px; object-fit:cover; }
+  .biz-top h3{ font-size:17px; }
+  .biz-top .biz-role{ font-size:12px; color: var(--accent-3); font-weight:600; }
+  .biz-row{ display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:10px; background: rgba(255,255,255,0.04); margin-bottom:8px; font-size:12.5px; }
+  .biz-row .biz-label{ font-size:9.5px; text-transform:uppercase; color: var(--text-dim); letter-spacing:.05em; }
+  .biz-row .biz-value{ font-family:'JetBrains Mono',monospace; font-size:12px; }
+  .qr-box{ text-align:center; }
+  .qr-box img{ width:180px; height:180px; border-radius:14px; background:#fff; padding:10px; }
+  .qr-box p{ font-size:12px; color: var(--text-dim); margin-top:10px; }
+
+  .contact-form{ display:flex; flex-direction:column; gap:14px; max-width:520px; margin-top:22px; }
+  .contact-form input, .contact-form textarea{
+    padding:13px 16px; border-radius:12px; border:1px solid var(--glass-border); background: var(--glass);
+    color: var(--text); font-family:'Inter',sans-serif; font-size:14px;
+  }
+  .contact-form textarea{ min-height:120px; resize:vertical; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder{ color: var(--text-dim); }
+
+  .hero2{ max-width:1200px; margin:0 auto; padding: 40px 5vw 20px; display:flex; gap:44px; align-items:flex-start; flex-wrap:wrap; }
+  .side-card{
+    width:290px; flex-shrink:0; border-radius:24px; padding:22px; position:relative;
+    background: linear-gradient(160deg, rgba(124,158,255,0.14), rgba(255,177,122,0.08)), var(--glass);
+    border:1px solid var(--glass-border); text-align:center;
+  }
+  .side-card img{ width:100%; aspect-ratio:1/1.05; object-fit:cover; border-radius:16px; }
+  .avail-pill{ display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; padding:6px 12px; border-radius:999px; background: rgba(111,214,176,0.12); border:1px solid rgba(111,214,176,0.4); color: var(--accent-3); margin-top:14px; }
+  .avail-pill .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent-3); }
+  .side-card h3{ margin-top:14px; font-size:22px; background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .side-card .side-role{ font-size:13px; color: var(--text-dim); margin-top:2px; }
+  .side-info{ margin-top:16px; display:flex; flex-direction:column; gap:8px; font-size:12.5px; color: var(--text-dim); }
+  .side-social{ display:flex; gap:8px; justify-content:center; margin-top:16px; }
+  .side-social a{ width:34px; height:34px; border-radius:10px; background: var(--glass-strong); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .side-card .btn{ width:100%; justify-content:center; margin-top:10px; }
+  .side-badge{ margin-top:14px; padding:10px; border-radius:12px; background: rgba(255,255,255,0.03); border:1px solid var(--glass-border); font-size:11px; text-align:left; }
+  .side-badge .label{ color: var(--text-dim); font-size:10px; text-transform:uppercase; letter-spacing:.05em; }
+  .side-badge .val{ color: var(--accent-3); font-weight:700; margin-top:2px; }
+
+  .hero2-main{ flex:1; min-width:280px; }
+  .hero2-badge{ display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:7px 16px; border-radius:999px; background: var(--glass-strong); border:1px solid var(--glass-border); color: var(--accent-2); margin-bottom:18px; }
+  .hero2-main h1{ font-size: clamp(32px,5vw,50px); line-height:1.1; font-weight:700; }
+  .hero2-main h1 .grad{ background: linear-gradient(90deg, var(--accent), var(--neon-pink), var(--accent-3)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero2-main p{ margin-top:18px; color: var(--text-dim); font-size:16px; max-width:56ch; }
+  .tech-pills{ display:flex; gap:9px; flex-wrap:wrap; margin-top:24px; }
+  .tech-pill{ display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; padding:8px 14px; border-radius:999px; background: var(--glass); border:1px solid var(--glass-border); }
+  .hero2-cta{ display:flex; gap:12px; margin-top:26px; flex-wrap:wrap; }
+  .qual-badges{ display:flex; gap:12px; flex-wrap:wrap; margin-top:36px; }
+  .qual-badge{ display:flex; align-items:center; gap:9px; padding:12px 18px; border-radius:14px; background: var(--glass); border:1px solid var(--glass-border); font-size:13px; font-weight:600; }
+  .qual-badge .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent-3); box-shadow: 0 0 8px var(--accent-3); }
 </style>
 </head>
 <body>
@@ -223,6 +305,8 @@
     <a href="#apropos" data-fr="À propos" data-en="About">À propos</a>
     <a href="#capacites" data-fr="Capacités" data-en="Skills">Capacités</a>
     <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
+    <a href="#temoignages" data-fr="Témoignages" data-en="Testimonials">Témoignages</a>
+    <a href="#carte" data-fr="Carte de visite" data-en="Business card">Carte de visite</a>
     <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="fr">FR</button>
@@ -239,22 +323,53 @@
   </div>
 </div>
 
-<section class="hero">
-  <div class="avatar-wrap">
-    <img class="avatar" src="images/avatar.jpg" alt="Fy Andrianantenaina" />
+<section class="hero2 reveal">
+  <div class="side-card">
+    <img src="images/avatar.jpg" alt="Fy Andrianantenaina" />
+    <div class="avail-pill"><span class="dot"></span> Disponible pour nouveaux projets</div>
+    <h3>NYAH</h3>
+    <div class="side-role">Fy ANDRIANANTENAINA — IT Programmeur</div>
+    <div class="side-info">
+      <div>✉️ contact.fy.services@gmail.com</div>
+      <div>📍 Moramanga, Madagascar</div>
+    </div>
+    <div class="side-social">
+      <a href="https://github.com/contactfyservices-art" target="_blank" rel="noopener">💻</a>
+      <a href="#contact">✉️</a>
+      <a href="#" target="_blank" rel="noopener">f</a>
+    </div>
+    <a class="btn btn-primary" href="#projets">Explorer mes projets</a>
+    <a class="btn btn-ghost" href="#contact">Me contacter</a>
+    <div class="side-badge">
+      <div class="label">Disponible pour</div>
+      <div class="val">Freelance & Missions ponctuelles</div>
+    </div>
   </div>
-  <div class="hero-text">
-    <div class="eyebrow" data-fr="Fy ANDRIANANTENAINA — IT Programmeur" data-en="Fy ANDRIANANTENAINA — IT Programmer">Fy ANDRIANANTENAINA — IT Programmeur</div>
-    <h1 data-fr="Je peux fournir logiciel ou app selon vos attentes dans le monde professionnel" data-en="I can build the software or app that fits your professional needs">Je peux fournir <span class="accent">logiciel ou app</span> selon vos attentes dans le monde professionnel</h1>
-    <p data-fr="Applications mobiles, sites web et outils métiers sur mesure — de l'idée au déploiement." data-en="Mobile apps, websites and custom business tools — from idea to deployment.">Applications mobiles, sites web et outils métiers sur mesure — de l'idée au déploiement.</p>
-    <div class="hero-cta">
+
+  <div class="hero2-main">
+    <div class="hero2-badge">Développeur passionné</div>
+    <h1 data-fr="Je conçois des logiciels et applications sur mesure, du cahier des charges à la mise en service" data-en="I design custom software and apps, from requirements to deployment">Je conçois des <span class="grad">logiciels</span> et <span class="grad">applications</span> sur mesure, du cahier des charges à la mise en service</h1>
+    <p data-fr="Applications mobiles, sites web et outils métiers — pensés pour résoudre de vrais besoins, avec un code propre et maintenable." data-en="Mobile apps, websites and business tools — built to solve real needs, with clean, maintainable code.">Applications mobiles, sites web et outils métiers — pensés pour résoudre de vrais besoins, avec un code propre et maintenable.</p>
+    <div class="tech-pills">
+      <div class="tech-pill">🐍 Python</div>
+      <div class="tech-pill">📱 Flutter</div>
+      <div class="tech-pill">🌐 HTML/CSS/JS</div>
+      <div class="tech-pill">☕ Java</div>
+      <div class="tech-pill">🗄️ SQL</div>
+    </div>
+    <div class="hero2-cta">
       <a class="btn btn-primary" href="#projets" data-fr="Voir mes projets" data-en="See my projects">Voir mes projets</a>
       <a class="btn btn-ghost" href="#contact" data-fr="Me contacter" data-en="Contact me">Me contacter</a>
+    </div>
+    <div class="qual-badges">
+      <div class="qual-badge"><span class="dot"></span> Réactif & disponible</div>
+      <div class="qual-badge"><span class="dot"></span> Code propre & maintenable</div>
+      <div class="qual-badge"><span class="dot"></span> Support après livraison</div>
     </div>
   </div>
 </section>
 
-<section class="section" id="apropos">
+<section class="section reveal" id="apropos">
   <div class="glass about" style="padding:28px;">
     <img src="images/about.jpg" alt="Fy Andrianantenaina" />
     <div>
@@ -264,7 +379,7 @@
   </div>
 </section>
 
-<section class="section" id="capacites">
+<section class="section reveal" id="capacites">
   <div class="section-head">
     <div class="section-eyebrow">Capacités</div>
     <h2>Ce que je peux construire</h2>
@@ -297,41 +412,92 @@
   </div>
 </section>
 
-<section class="section" id="projets">
+<section class="section reveal" id="projets">
   <div class="section-head">
     <div class="section-eyebrow">Portfolio</div>
     <h2>Projets réalisés</h2>
     <p>Une sélection de projets disponibles sur mon GitHub.</p>
   </div>
   <div class="portfolio-list">
-    <div class="glass project">
+    <div class="glass project" data-project="varecia">
       <div>
         <span class="project-tag">Flutter · Dart</span>
         <h3>Varecia</h3>
         <p>Application pour l'Association Varecia, association étudiante environnementale de Toamasina : comptes, activités, bibliothèque et galerie.</p>
       </div>
+      <button class="like-btn" data-key="like-varecia"><span class="heart">❤️</span> <span class="like-count">0</span></button>
       <a class="btn btn-ghost" href="https://github.com/contactfyservices-art/varecia-flutter" target="_blank" rel="noopener">Voir le code</a>
     </div>
-    <div class="glass project">
+    <div class="glass project" data-project="multinotes">
       <div>
         <span class="project-tag">Flutter · Dart</span>
         <h3>Multinotes</h3>
         <p>Application de prise de notes pensée pour ne rien oublier au quotidien.</p>
       </div>
+      <button class="like-btn" data-key="like-multinotes"><span class="heart">❤️</span> <span class="like-count">0</span></button>
       <a class="btn btn-ghost" href="https://github.com/contactfyservices-art/multinotes_app" target="_blank" rel="noopener">Voir le code</a>
     </div>
-    <div class="glass project">
+    <div class="glass project" data-project="zanako">
       <div>
         <span class="project-tag">Flutter · Dart</span>
         <h3>Zanako</h3>
         <p>Application d'apprentissage de la lecture et de l'écriture pour les enfants.</p>
       </div>
+      <button class="like-btn" data-key="like-zanako"><span class="heart">❤️</span> <span class="like-count">0</span></button>
       <a class="btn btn-ghost" href="https://github.com/contactfyservices-art/Zanako" target="_blank" rel="noopener">Voir le code</a>
     </div>
   </div>
 </section>
 
-<section class="section" id="contact">
+<section class="section reveal" id="temoignages">
+  <div class="section-head">
+    <div class="section-eyebrow">Témoignages</div>
+    <h2>Ce qu'on dit de mon travail</h2>
+  </div>
+  <div class="testimonials">
+    <div class="glass testimonial">
+      <p>Un travail sérieux et livré dans les délais, avec un vrai souci du détail sur chaque fonctionnalité demandée.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">AT</div>
+        <div><div class="testimonial-name">Client Association</div><div class="testimonial-role">Projet applicatif</div></div>
+      </div>
+    </div>
+    <div class="glass testimonial">
+      <p>Communication claire tout au long du projet, et une vraie capacité à traduire un besoin métier en outil concret.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">CM</div>
+        <div><div class="testimonial-name">Client Comptabilité</div><div class="testimonial-role">Logiciel de gestion</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="carte">
+  <div class="section-head">
+    <div class="section-eyebrow">Carte de visite</div>
+    <h2>Ma carte de visite numérique</h2>
+    <p>Téléchargez-la ou scannez le QR code pour retrouver mon site.</p>
+  </div>
+  <div class="card-wrap">
+    <div class="biz-card" id="biz-card">
+      <div class="biz-top">
+        <img src="images/avatar.jpg" alt="Fy Andrianantenaina" />
+        <div><h3>Fy ANDRIANANTENAINA</h3><div class="biz-role">IT Programmeur</div></div>
+      </div>
+      <div class="biz-row"><div><div class="biz-label">Téléphone</div><div class="biz-value">+261 32 296 1155</div></div></div>
+      <div class="biz-row"><div><div class="biz-label">WhatsApp</div><div class="biz-value">+261 33 417 5026</div></div></div>
+      <div class="biz-row"><div><div class="biz-label">Email</div><div class="biz-value">contact.fy.services@gmail.com</div></div></div>
+      <div class="biz-row"><div><div class="biz-label">Basé à</div><div class="biz-value">Moramanga, Madagascar</div></div></div>
+    </div>
+    <div class="qr-box">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://finaritra.pages.dev&color=0b0e17&bgcolor=ffffff" alt="QR code vers finaritra.pages.dev" />
+      <p>Scannez pour ouvrir<br/>finaritra.pages.dev</p>
+      <button class="btn btn-primary" id="download-card-btn" style="margin-top:14px;">↓ Télécharger la carte</button>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="contact">
   <div class="section-head">
     <div class="section-eyebrow">Contact</div>
     <h2>Discutons de votre projet</h2>
@@ -362,6 +528,12 @@
       <div class="contact-detail"><div class="contact-type">GitHub</div><div class="contact-value">github.com/contactfyservices-art</div></div>
     </div>
   </div>
+  <form class="contact-form" id="contact-form">
+    <input type="text" name="nom" placeholder="Votre nom" required />
+    <input type="email" name="email" placeholder="Votre email" required />
+    <textarea name="message" placeholder="Votre message / projet" required></textarea>
+    <button type="submit" class="btn btn-primary">Envoyer le message</button>
+  </form>
 </section>
 
 <footer>
@@ -394,6 +566,66 @@ document.addEventListener('DOMContentLoaded', function(){
       });
     });
   });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, {threshold:0.12});
+    reveals.forEach(function(r){ obs.observe(r); });
+  } else {
+    reveals.forEach(function(r){ r.classList.add('in'); });
+  }
+
+  document.querySelectorAll('.like-btn').forEach(function(btn){
+    var key = btn.getAttribute('data-key');
+    var countEl = btn.querySelector('.like-count');
+    var liked = localStorage.getItem(key + '-liked') === '1';
+    var count = parseInt(localStorage.getItem(key + '-count') || '0', 10);
+    countEl.textContent = count;
+    if(liked) btn.classList.add('liked');
+    btn.addEventListener('click', function(){
+      var isLiked = btn.classList.contains('liked');
+      count = parseInt(localStorage.getItem(key + '-count') || '0', 10);
+      if(isLiked){
+        count = Math.max(0, count - 1);
+        btn.classList.remove('liked');
+        localStorage.setItem(key + '-liked', '0');
+      } else {
+        count = count + 1;
+        btn.classList.add('liked');
+        localStorage.setItem(key + '-liked', '1');
+      }
+      localStorage.setItem(key + '-count', count);
+      countEl.textContent = count;
+    });
+  });
+
+  var cardBtn = document.getElementById('download-card-btn');
+  var bizCard = document.getElementById('biz-card');
+  if(cardBtn && bizCard){
+    cardBtn.addEventListener('click', function(){
+      html2canvas(bizCard, {backgroundColor:'#0b0e17', scale:3}).then(function(canvas){
+        var link = document.createElement('a');
+        link.download = 'FY-Andrianantenaina-carte-visite.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+  }
+
+  var form = document.getElementById('contact-form');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var nom = form.nom.value, email = form.email.value, message = form.message.value;
+      var subject = encodeURIComponent('Contact depuis Nyah — ' + nom);
+      var body = encodeURIComponent(message + '\n\n— ' + nom + ' (' + email + ')');
+      window.location.href = 'mailto:contact.fy.services@gmail.com?subject=' + subject + '&body=' + body;
+    });
+  }
 });
 </script>
 </body>
