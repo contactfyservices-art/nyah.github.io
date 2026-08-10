@@ -364,44 +364,78 @@
 
   .card-wrap{ display:flex; gap:36px; flex-wrap:wrap; align-items:flex-start; justify-content:center; }
 
-  /* --- Carte de visite façon "carte gravée" (papier sombre + motif "W" embossé, QR argenté) --- */
+  /* --- Carte de visite PRO façon modèle (deux tons + ruban accent + QR + photo) --- */
   .biz-card{
-    width:420px; aspect-ratio:16/9; border-radius:10px; padding:32px 30px 26px;
-    position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between;
-    background: radial-gradient(140% 160% at 15% 0%, #34373d 0%, #232529 42%, #16171a 100%);
+    width:460px; aspect-ratio:16/9; border-radius:16px;
+    position:relative; overflow:hidden;
+    background:#eef1ee;
     box-shadow:
-      0 30px 60px -22px rgba(0,0,0,0.8),
-      inset 0 1px 0 rgba(255,255,255,0.06),
-      inset 0 0 0 1px rgba(255,255,255,0.05);
+      0 30px 70px -20px rgba(0,212,255,0.30),
+      0 0 0 1px rgba(0,212,255,0.22);
+    transition: transform .35s ease, box-shadow .35s ease;
   }
-  /* motif "W" embossé répété en diagonale, comme sur le modèle */
-  .biz-card::before{
-    content:""; position:absolute; z-index:0; pointer-events:none;
-    top:-40%; left:-25%; width:160%; height:180%;
-    transform: rotate(-9deg);
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='90'%3E%3Cg fill='none' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-10,72 L22,16 L54,72 L86,16 L118,72 L150,16' stroke='rgba(0,0,0,0.38)' transform='translate(1.2,1.2)'/%3E%3Cpath d='M-10,72 L22,16 L54,72 L86,16 L118,72 L150,16' stroke='rgba(255,255,255,0.09)' transform='translate(-1.2,-1.2)'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 130px 90px;
-    background-repeat: repeat;
-    opacity:0.9;
+  .biz-card:hover{
+    transform: translateY(-4px) scale(1.012);
+    box-shadow:
+      0 36px 80px -18px rgba(0,212,255,0.42),
+      0 0 0 1px rgba(0,212,255,0.35);
   }
-  .biz-card::after{
-    content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
-    background: radial-gradient(90% 70% at 20% 10%, rgba(255,255,255,0.05), transparent 60%);
+  /* fond vert pétrole en diagonale */
+  .biz-card .biz-bg-dark{
+    position:absolute; inset:0; z-index:0;
+    background: linear-gradient(160deg,#0f3f37 0%, #0a2b26 65%, #08201c 100%);
+    clip-path: polygon(0 32%, 100% 0%, 100% 100%, 0% 100%);
   }
-  .biz-top{ position:relative; z-index:1; }
-  .biz-top h3{
-    font-family:'Playfair Display', serif; font-weight:700; font-size:30px; line-height:1.15; letter-spacing:0;
-    color:#f7f5ef; margin-bottom:6px; text-shadow:0 1px 1px rgba(0,0,0,0.4);
+  .biz-card .biz-bg-light{
+    position:absolute; top:0; left:0; right:0; height:38%; z-index:0;
+    background:#eef1ee;
   }
-  .biz-top .biz-role{ font-family:'Quicksand', sans-serif; font-size:16px; line-height:1.2; color:#d3d5da; font-weight:500; letter-spacing:0.01em; }
-  .biz-lines{ position:relative; z-index:1; display:flex; flex-direction:column; gap:2px; margin-top:20px; }
-  .biz-row{ font-size:13px; line-height:1.55; color:#b6b9bf; font-family:'Quicksand', sans-serif; font-weight:500; }
-  .biz-qr-corner{ position:absolute; z-index:1; top:26px; right:26px; display:flex; flex-direction:column; align-items:center; gap:8px; }
-  .biz-qr-corner img{ width:96px; height:96px; border-radius:4px; background:#dcdcd8; padding:6px; box-shadow:0 8px 20px -8px rgba(0,0,0,0.65); }
-  .biz-qr-tags{ display:flex; align-items:stretch; gap:5px; }
-  .biz-qr-avatar{ width:30px; height:26px; flex-shrink:0; border-radius:4px; background:#dcdcd8; display:flex; align-items:center; justify-content:center; font-size:14px; position:relative; }
-  .biz-qr-avatar span{ position:absolute; bottom:-3px; right:-4px; width:12px; height:12px; border-radius:50%; background:#16171a; color:#dcdcd8; font-size:8px; font-weight:800; display:flex; align-items:center; justify-content:center; }
-  .biz-qr-label{ font-size:10.5px; letter-spacing:.03em; color:#1c1d20; font-weight:800; background:#dcdcd8; border-radius:4px; padding:6px 9px; display:flex; align-items:center; white-space:nowrap; }
+  /* ruban orange accent (nom + rôle) */
+  .biz-card .biz-ribbon{
+    position:absolute; z-index:1; top:0; right:0; width:42%; height:58%;
+    background: linear-gradient(155deg,#ff9a38,#ff7a10);
+    clip-path: polygon(18% 0, 100% 0, 100% 100%, 0% 100%);
+    display:flex; flex-direction:column; justify-content:center; padding:0 0 0 26%;
+  }
+  .biz-card .biz-ribbon h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; color:#1a1c1a; line-height:1.15; }
+  .biz-card .biz-ribbon .biz-role{ font-size:11.5px; font-weight:700; color:#1a1c1a; opacity:.8; margin-top:3px; letter-spacing:.02em; }
+  /* photo circulaire, chevauche vert/orange */
+  .biz-card .biz-photo{
+    position:absolute; z-index:3; left:56%; top:38%; transform:translate(-50%,-50%);
+    width:104px; height:104px; border-radius:50%; overflow:hidden; border:4px solid #eef1ee;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,0.5);
+  }
+  .biz-card .biz-photo img{ width:100%; height:100%; object-fit:cover; }
+  /* QR blanc coin supérieur droit */
+  .biz-card .biz-qr-corner{ position:absolute; z-index:2; top:16px; right:16px; }
+  .biz-card .biz-qr-corner img{ width:78px; height:78px; border-radius:6px; background:#fff; padding:5px; box-shadow:0 10px 22px -8px rgba(0,0,0,0.5); }
+  /* logo + tagline coin sup gauche (zone claire) */
+  .biz-card .biz-brand{ position:absolute; z-index:1; top:18px; left:24px; }
+  .biz-card .biz-brand .bn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:15px; color:#0f2a25; }
+  .biz-card .biz-brand .bt{ font-size:10px; color:#5b6b66; margin-top:1px; }
+  /* liste contact icônée, sur fond vert */
+  .biz-lines{ position:absolute; z-index:1; left:24px; bottom:20px; display:flex; flex-direction:column; gap:7px; }
+  .biz-row{ display:flex; align-items:center; gap:9px; font-size:11.5px; line-height:1.3; color:#dfe6e3; font-family:'Quicksand', sans-serif; font-weight:500; }
+  .biz-row .bi{ width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,0.14); display:flex; align-items:center; justify-content:center; font-size:10.5px; flex-shrink:0; }
+  /* étiquette scan */
+  .biz-card .biz-qr-label{ position:absolute; z-index:2; top:98px; right:16px; font-size:8.5px; font-weight:800; letter-spacing:.04em; color:#0f2a25; background:#fff; border-radius:5px; padding:3px 7px; box-shadow:0 6px 14px -6px rgba(0,0,0,0.4); }
+
+  /* --- Verso de la carte --- */
+  .biz-card-back{
+    width:460px; aspect-ratio:16/9; border-radius:16px; position:relative; overflow:hidden;
+    background:#eef1ee; box-shadow:0 30px 70px -20px rgba(0,212,255,0.20), 0 0 0 1px rgba(0,212,255,0.16);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  }
+  .biz-card-back .biz-bg-dark-back{
+    position:absolute; top:0; left:0; right:0; height:34%; z-index:0;
+    background: linear-gradient(100deg,#0f3f37,#0a2b26);
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 55% 100%, 0 100%);
+  }
+  .biz-card-back .bn{ position:relative; z-index:1; font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:22px; color:#0f2a25; text-align:center; }
+  .biz-card-back .bt{ position:relative; z-index:1; font-size:11.5px; color:#5b6b66; text-align:center; max-width:70%; }
+
+  @media (max-width:520px){ .biz-card, .biz-card-back{ width:100%; max-width:400px; } }
+
   .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
   .gallery-card{ padding:14px; text-align:center; transition: transform .25s ease, border-color .25s ease; }
   .theatre-grid{ display:grid; grid-template-columns: 1.1fr 1fr; gap:28px; align-items:start; }
@@ -419,8 +453,11 @@
   .gallery-card p{ margin-top:12px; font-size:13px; color: var(--text-dim); font-weight:600; }
 
   .qr-box{ text-align:center; }
-  .qr-box img{ width:180px; height:180px; border-radius:14px; background:#fff; padding:10px; }
-  .qr-box p{ font-size:12px; color: var(--text-dim); margin-top:10px; }
+  .qr-frame{ display:inline-block; padding:5px; border-radius:18px; background:linear-gradient(150deg, rgba(0,212,255,0.55), rgba(255,61,127,0.4)); box-shadow:0 22px 44px -20px rgba(0,212,255,0.4); }
+  .qr-box img{ width:180px; height:180px; border-radius:14px; background:#fff; padding:10px; display:block; }
+  .qr-box p{ font-size:12px; color: var(--text-dim); margin-top:12px; }
+  .qr-scan-badge{ display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:800; letter-spacing:.04em; color:#0b0e17; background:linear-gradient(90deg,var(--accent),var(--accent-2)); padding:5px 12px; border-radius:999px; margin-bottom:12px; animation: qrPulse 2.2s ease-in-out infinite; }
+  @keyframes qrPulse{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.85; transform:scale(1.04); } }
 
   .contact-form{ display:flex; flex-direction:column; gap:14px; max-width:520px; margin-top:22px; }
   .contact-form input, .contact-form textarea{
@@ -640,10 +677,10 @@
       <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
       <a href="#temoignages" data-fr="Témoignages" data-en="Testimonials">Témoignages</a>
       <a href="#galerie" data-fr="Galerie" data-en="Gallery">Galerie</a>
-      <a href="#theatre" data-fr="Théâtre" data-en="Theatre">Théâtre</a>
       <a href="#carte" data-fr="Carte de visite" data-en="Business card">Carte de visite</a>
       <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
       <a href="#autre" data-fr="Autre" data-en="Other">Autre</a>
+      <a href="#theatre" data-fr="Théâtre" data-en="Theatre">Théâtre</a>
       <div class="lang-toggle">
         <button class="lang-btn active" data-lang="fr">FR</button>
         <button class="lang-btn" data-lang="en">EN</button>
@@ -695,13 +732,15 @@
         <span style="font-size:13px; color:var(--text-dim);" data-fr="Voir mes projets" data-en="See my projects">Voir mes projets</span>
       </div>
       <div class="tech-pills" style="margin-top:26px;">
-        <div class="tech-pill">🐍 Python</div>
-        <div class="tech-pill">📱 Flutter</div>
-        <div class="tech-pill">🌐 HTML/CSS/JS</div>
-        <div class="tech-pill">☕ Java</div>
-        <div class="tech-pill">🤖 Kotlin</div>
+        <div class="tech-pill"><img src="images/icon-python.png" alt="" style="width:16px;height:16px;object-fit:contain;" /> Python</div>
+        <div class="tech-pill"><img src="images/icon-flutter.png" alt="" style="width:16px;height:16px;object-fit:contain;" /> Flutter</div>
+        <div class="tech-pill"><img src="images/icon-html5.jpg" alt="" style="width:16px;height:16px;object-fit:contain;" /> HTML5</div>
+        <div class="tech-pill"><img src="images/icon-css3.png" alt="" style="width:16px;height:16px;object-fit:contain;" /> CSS3</div>
+        <div class="tech-pill"><img src="images/icon-java.svg" alt="" style="width:16px;height:16px;object-fit:contain;" /> Java</div>
+        <div class="tech-pill"><img src="images/icon-kotlin.png" alt="" style="width:16px;height:16px;object-fit:contain;" /> Kotlin</div>
+        <div class="tech-pill"><img src="images/icon-json.png" alt="" style="width:16px;height:16px;object-fit:contain;" /> JSON</div>
         <div class="tech-pill">🗄️ SQL</div>
-        <div class="tech-pill">⚙️ Automatisation</div>
+        <div class="tech-pill"><img src="images/icon-automation.jpg" alt="" style="width:16px;height:16px;object-fit:contain;" /> Automatisation</div>
         <div class="tech-pill">📄 Pages web</div>
       </div>
     </div>
@@ -781,25 +820,19 @@
       <div class="cap-body"><h3 data-fr="Outils Python" data-en="Python tools">Outils Python</h3><p data-fr="Automatisation, traitement de données, tableaux de bord." data-en="Automation, data processing, dashboards.">Automatisation, traitement de données, tableaux de bord.</p></div>
     </div>
     <div class="glass cap-card">
-      <div class="cap-media blue"><img src="images/apps-collection.jpg" alt="Logiciels métiers" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="Logiciels métiers" data-en="Business software">Logiciels métiers</h3><p data-fr="Gestion de caisse, comptabilité, suivi d'activités." data-en="Cash management, accounting, activity tracking.">Gestion de caisse, comptabilité, suivi d'activités.</p></div>
+      <div class="cap-media blue" style="padding:14px;"><img src="images/software-package.jpg" alt="Logiciel de comptabilité" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;" /></div>
+      <div class="cap-body"><h3 data-fr="Logiciels métiers" data-en="Business software">Logiciels métiers</h3><p data-fr="Logiciel de comptabilité déjà livré (packagé, disponible en téléchargement), gestion de caisse, suivi d'activités." data-en="Accounting software already delivered (packaged, downloadable), cash management, activity tracking.">Logiciel de comptabilité déjà livré (packagé, disponible en téléchargement), gestion de caisse, suivi d'activités.</p></div>
     </div>
     <div class="glass cap-card">
-      <div class="cap-media orange">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-width="1.4"/></svg>
-      </div>
+      <div class="cap-media orange" style="padding:18px;"><img src="images/icon-maintenance.png" alt="Maintenance informatique" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;" /></div>
       <div class="cap-body"><h3 data-fr="Maintenance informatique" data-en="Computer maintenance">Maintenance informatique</h3><p data-fr="Intervention sur site : mot de passe oublié, problèmes système, lenteurs, virus, installation & dépannage PC." data-en="On-site support: forgotten passwords, system issues, slowdowns, viruses, PC setup & troubleshooting.">Intervention sur site : mot de passe oublié, problèmes système, lenteurs, virus, installation & dépannage PC.</p></div>
     </div>
     <div class="glass cap-card">
-      <div class="cap-media green">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.5"><path d="M4 17l5-10 5 10M6.5 12h5" stroke-width="1.4"/><circle cx="17.5" cy="14.5" r="4.5" stroke-width="1.4"/><path d="M17.5 12v2.5l1.8 1" stroke-width="1.4"/></svg>
-      </div>
+      <div class="cap-media green" style="padding:22px;"><img src="images/icon-kotlin.png" alt="Kotlin" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;" /></div>
       <div class="cap-body"><h3 data-fr="Kotlin" data-en="Kotlin">Kotlin</h3><p data-fr="Développement d'applications Android natives en Kotlin." data-en="Native Android app development in Kotlin.">Développement d'applications Android natives en Kotlin.</p></div>
     </div>
     <div class="glass cap-card">
-      <div class="cap-media orange">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#ff8a1f" stroke-width="1.5"><path d="M4 4v6h6M20 20v-6h-6" stroke-width="1.5"/><path d="M5.5 15A8 8 0 0 0 20 10M18.5 9A8 8 0 0 0 4 14" stroke-width="1.5"/></svg>
-      </div>
+      <div class="cap-media orange" style="padding:10px;"><img src="images/icon-automation.jpg" alt="Automatisation" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;" /></div>
       <div class="cap-body"><h3 data-fr="Automatisation" data-en="Automation">Automatisation</h3><p data-fr="Scripts et outils pour automatiser les tâches répétitives et gagner du temps." data-en="Scripts and tools to automate repetitive tasks and save time.">Scripts et outils pour automatiser les tâches répétitives et gagner du temps.</p></div>
     </div>
     <div class="glass cap-card">
@@ -892,6 +925,127 @@
   </div>
 </section>
 
+<section class="section reveal" id="carte">
+  <div class="section-head">
+    <div class="section-eyebrow" data-fr="Carte de visite" data-en="Business card">Carte de visite</div>
+    <h2 data-fr="Ma carte de visite numérique" data-en="My digital business card">Ma carte de visite numérique</h2>
+    <p data-fr="Téléchargez-la ou scannez le QR code pour retrouver mon site." data-en="Download it or scan the QR code to find my site.">Téléchargez-la ou scannez le QR code pour retrouver mon site.</p>
+  </div>
+  <div class="card-wrap">
+    <div class="biz-card" id="biz-card">
+      <div class="biz-bg-light"></div>
+      <div class="biz-bg-dark"></div>
+      <div class="biz-brand">
+        <div class="bn">Nyah_ITProg</div>
+        <div class="bt" data-fr="Web · Mobile · Logiciels" data-en="Web · Mobile · Software">Web · Mobile · Logiciels</div>
+      </div>
+      <div class="biz-ribbon">
+        <h3>Fy Andrianantenaina</h3>
+        <div class="biz-role" data-fr="IT PROGRAMMEUR" data-en="IT PROGRAMMER">IT PROGRAMMEUR</div>
+      </div>
+      <div class="biz-photo"><img src="images/fy-identite.jpg" alt="Fy Andrianantenaina" /></div>
+      <div class="biz-qr-corner">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://finaritra.pages.dev&color=0b0e17&bgcolor=ffffff" alt="QR finaritra.pages.dev" />
+      </div>
+      <div class="biz-qr-label" data-fr="SCANNEZ-MOI" data-en="SCAN ME">SCANNEZ-MOI</div>
+      <div class="biz-lines">
+        <div class="biz-row"><span class="bi">☎</span>+261 32 296 1155</div>
+        <div class="biz-row"><span class="bi">✉</span>contact.fy.services@gmail.com</div>
+        <div class="biz-row"><span class="bi">🌐</span>finaritra.pages.dev</div>
+        <div class="biz-row"><span class="bi">📍</span>Moramanga, Madagascar</div>
+      </div>
+    </div>
+
+    <div class="biz-card-back">
+      <div class="biz-bg-dark-back"></div>
+      <div class="bn">Nyah_ITProg</div>
+      <div class="bt" data-fr="Fy ANDRIANANTENAINA — IT Programmeur" data-en="Fy ANDRIANANTENAINA — IT Programmer">Fy ANDRIANANTENAINA — IT Programmeur</div>
+    </div>
+
+    <div class="qr-box">
+      <div class="qr-scan-badge">📷 <span data-fr="SCANNEZ-MOI" data-en="SCAN ME">SCANNEZ-MOI</span></div>
+      <div class="qr-frame">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://finaritra.pages.dev&color=0b0e17&bgcolor=ffffff" alt="QR code vers finaritra.pages.dev" />
+      </div>
+      <p data-fr="Scannez pour ouvrir<br/>finaritra.pages.dev" data-en="Scan to open<br/>finaritra.pages.dev">Scannez pour ouvrir<br/>finaritra.pages.dev</p>
+      <button class="btn btn-primary" id="download-card-btn" style="margin-top:14px;" data-fr="↓ Télécharger la carte" data-en="↓ Download the card">↓ Télécharger la carte</button>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="contact">
+  <div class="section-head">
+    <div class="section-eyebrow" data-fr="Contact" data-en="Contact">Contact</div>
+    <h2 data-fr="Discutons de votre projet" data-en="Let's talk about your project">Discutons de votre projet</h2>
+  </div>
+  <div class="contact-links">
+    <a class="glass contact-card" href="tel:+261322961155">
+      <div class="contact-icon"><img src="images/icon-phone.jpg" alt="Téléphone" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" /></div>
+      <div class="contact-detail"><div class="contact-type" data-fr="Appeler" data-en="Call">Appeler</div><div class="contact-value">+261 32 296 1155</div></div>
+    </a>
+    <a class="glass contact-card" href="https://wa.me/261334175026?text=Bonjour%20Fy%2C%20je%20vous%20contacte%20depuis%20votre%20site%20web." target="_blank" rel="noopener">
+      <div class="contact-icon"><img src="images/icon-whatsapp.jpg" alt="WhatsApp" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" /></div>
+      <div class="contact-detail"><div class="contact-type">WhatsApp</div><div class="contact-value">+261 33 417 5026</div></div>
+    </a>
+    <a class="glass contact-card" href="mailto:contact.fy.services@gmail.com?subject=Contact%20depuis%20votre%20site&body=Bonjour%20Fy%2C">
+      <div class="contact-icon"><img src="images/icon-email.png" alt="Email" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" /></div>
+      <div class="contact-detail"><div class="contact-type">Email</div><div class="contact-value">contact.fy.services@gmail.com</div></div>
+    </a>
+    <a class="glass contact-card" href="#" target="_blank" rel="noopener">
+      <div class="contact-icon"><img src="images/icon-facebook.png" alt="Facebook" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" /></div>
+      <div class="contact-detail"><div class="contact-type">Facebook</div><div class="contact-value" data-fr="Voir mon profil" data-en="View my profile">Voir mon profil</div></div>
+    </a>
+    <div class="glass contact-card">
+      <div class="contact-icon">📍</div>
+      <div class="contact-detail"><div class="contact-type" data-fr="Basé à" data-en="Based in">Basé à</div><div class="contact-value">Moramanga, Madagascar</div></div>
+    </div>
+    <a class="glass contact-card" href="https://github.com/contactfyservices-art" target="_blank" rel="noopener">
+      <div class="contact-icon"><img src="images/icon-github.png" alt="GitHub" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" /></div>
+      <div class="contact-detail"><div class="contact-type">GitHub</div><div class="contact-value">github.com/contactfyservices-art</div></div>
+    </a>
+  </div>
+  <form class="contact-form" id="contact-form">
+    <input type="text" name="nom" placeholder="Votre nom" data-fr-ph="Votre nom" data-en-ph="Your name" required />
+    <input type="email" name="email" placeholder="Votre email" data-fr-ph="Votre email" data-en-ph="Your email" required />
+    <textarea name="message" placeholder="Votre message / projet" data-fr-ph="Votre message / projet" data-en-ph="Your message / project" required></textarea>
+    <button type="submit" class="btn btn-primary" data-fr="Envoyer le message" data-en="Send message">Envoyer le message</button>
+  </form>
+</section>
+
+<section class="section reveal" id="autre">
+  <div class="section-head">
+    <div class="section-eyebrow" data-fr="Polyvalence" data-en="Versatility">Polyvalence</div>
+    <h2 data-fr="Au-delà du code" data-en="Beyond the code">Au-delà du code</h2>
+    <p data-fr="Avant et à côté du développement, j'ai un parcours solide en environnement, HSE et gestion de projets — une ouverture d'esprit qui nourrit aussi ma façon de construire des outils numériques." data-en="Alongside development, I have a solid background in environment, HSE and project management — an open-minded, cross-disciplinary approach that also shapes how I build digital tools.">Avant et à côté du développement, j'ai un parcours solide en environnement, HSE et gestion de projets — une ouverture d'esprit qui nourrit aussi ma façon de construire des outils numériques.</p>
+  </div>
+  <div class="capabilities">
+    <div class="glass cap-card">
+      <div class="cap-media green"><img src="images/fy-plantation.png" alt="Fy plantation d'arbre" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;position:relative;z-index:1;" /></div>
+      <div class="cap-body"><h3 data-fr="Environnement & biodiversité" data-en="Environment & biodiversity">Environnement & biodiversité</h3><p data-fr="Restauration écologique, revégétalisation, gestion de pépinière et compostage." data-en="Ecological restoration, revegetation, nursery management and composting.">Restauration écologique, revégétalisation, gestion de pépinière et compostage.</p></div>
+    </div>
+    <div class="glass cap-card">
+      <div class="cap-media orange"><img src="images/team-meeting.jpg" alt="HSE & conformité terrain" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
+      <div class="cap-body"><h3 data-fr="HSE & conformité terrain" data-en="HSE & field compliance">HSE & conformité terrain</h3><p data-fr="Supervision d'équipes, gestion des déchets, inspections et suivi des normes ESS." data-en="Team supervision, waste management, inspections and ESS standards monitoring.">Supervision d'équipes, gestion des déchets, inspections et suivi des normes ESS.</p></div>
+    </div>
+    <div class="glass cap-card">
+      <div class="cap-media blue"><img src="images/growth-chart.png" alt="Analyse & gestion de processus" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
+      <div class="cap-body"><h3 data-fr="Analyse & gestion de processus" data-en="Business analysis & process management">Analyse & gestion de processus</h3><p data-fr="Certifié Business Analysis & Process Management (Coursera, 2026)." data-en="Certified in Business Analysis & Process Management (Coursera, 2026).">Certifié Business Analysis & Process Management (Coursera, 2026).</p></div>
+    </div>
+    <div class="glass cap-card">
+      <div class="cap-media green"><img src="images/cybersecurite.jpg" alt="Cybersécurité & sensibilisation" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
+      <div class="cap-body"><h3 data-fr="Cybersécurité & sensibilisation" data-en="Cybersecurity awareness">Cybersécurité & sensibilisation</h3><p data-fr="Certificat Cybercriminalité — ONUDC / SPARK, 2026." data-en="Cybercrime certificate — UNODC / SPARK, 2026.">Certificat Cybercriminalité — ONUDC / SPARK, 2026.</p></div>
+    </div>
+    <div class="glass cap-card">
+      <div class="cap-media orange"><img src="images/feedback-like.png" alt="Interculturel & sécurité psychologique" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
+      <div class="cap-body"><h3 data-fr="Interculturel & sécurité psychologique" data-en="Intercultural & psychological safety">Interculturel & sécurité psychologique</h3><p data-fr="Compétences interculturelles (UNITAR/OIF) et Sécurité psychologique (UNICEF), 2026." data-en="Intercultural skills (UNITAR/OIF) and Psychological Safety (UNICEF), 2026.">Compétences interculturelles (UNITAR/OIF) et Sécurité psychologique (UNICEF), 2026.</p></div>
+    </div>
+    <div class="glass cap-card">
+      <div class="cap-media blue"><img src="images/agriculture.jpg" alt="Agriculture durable" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
+      <div class="cap-body"><h3 data-fr="Agriculture durable" data-en="Sustainable agriculture">Agriculture durable</h3><p data-fr="Pratiques d'agriculture durable & normes environnementales, sociales et climatiques (IFDD/OIF, FIDA/OIT), 2026." data-en="Sustainable agriculture practices & environmental, social and climate standards (IFDD/OIF, IFAD/ILO), 2026.">Pratiques d'agriculture durable & normes environnementales, sociales et climatiques (IFDD/OIF, FIDA/OIT), 2026.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="section reveal" id="theatre">
   <div class="section-head">
     <div class="section-eyebrow" data-fr="Théâtre" data-en="Theatre">Théâtre</div>
@@ -939,112 +1093,6 @@
   </div>
 </section>
 
-<section class="section reveal" id="carte">
-  <div class="section-head">
-    <div class="section-eyebrow" data-fr="Carte de visite" data-en="Business card">Carte de visite</div>
-    <h2 data-fr="Ma carte de visite numérique" data-en="My digital business card">Ma carte de visite numérique</h2>
-    <p data-fr="Téléchargez-la ou scannez le QR code pour retrouver mon site." data-en="Download it or scan the QR code to find my site.">Téléchargez-la ou scannez le QR code pour retrouver mon site.</p>
-  </div>
-  <div class="card-wrap">
-    <div class="biz-card" id="biz-card">
-      <div class="biz-top">
-        <h3>Fy Andrianantenaina</h3>
-        <div class="biz-role" data-fr="IT Programmeur" data-en="IT Programmer">IT Programmeur</div>
-      </div>
-      <div class="biz-lines">
-        <div class="biz-row" data-fr="Moramanga, Madagascar" data-en="Moramanga, Madagascar">Moramanga, Madagascar</div>
-        <div class="biz-row">+261 32 296 1155</div>
-        <div class="biz-row">contact.fy.services@gmail.com</div>
-        <div class="biz-row">finaritra.pages.dev</div>
-      </div>
-      <div class="biz-qr-corner">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://finaritra.pages.dev&color=0b0e17&bgcolor=ffffff" alt="QR finaritra.pages.dev" />
-        <div class="biz-qr-tags">
-          <div class="biz-qr-avatar">👤<span>+</span></div>
-          <div class="biz-qr-label" data-fr="SCANNEZ-MOI !" data-en="SCAN ME!">SCANNEZ-MOI !</div>
-        </div>
-      </div>
-    </div>
-    <div class="qr-box">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://finaritra.pages.dev&color=0b0e17&bgcolor=ffffff" alt="QR code vers finaritra.pages.dev" />
-      <p data-fr="Scannez pour ouvrir<br/>finaritra.pages.dev" data-en="Scan to open<br/>finaritra.pages.dev">Scannez pour ouvrir<br/>finaritra.pages.dev</p>
-      <button class="btn btn-primary" id="download-card-btn" style="margin-top:14px;" data-fr="↓ Télécharger la carte" data-en="↓ Download the card">↓ Télécharger la carte</button>
-    </div>
-  </div>
-</section>
-
-<section class="section reveal" id="contact">
-  <div class="section-head">
-    <div class="section-eyebrow" data-fr="Contact" data-en="Contact">Contact</div>
-    <h2 data-fr="Discutons de votre projet" data-en="Let's talk about your project">Discutons de votre projet</h2>
-  </div>
-  <div class="contact-links">
-    <a class="glass contact-card" href="tel:+261322961155">
-      <div class="contact-icon">☎️</div>
-      <div class="contact-detail"><div class="contact-type" data-fr="Appeler" data-en="Call">Appeler</div><div class="contact-value">+261 32 296 1155</div></div>
-    </a>
-    <a class="glass contact-card" href="https://wa.me/261334175026?text=Bonjour%20Fy%2C%20je%20vous%20contacte%20depuis%20votre%20site%20web." target="_blank" rel="noopener">
-      <div class="contact-icon">💬</div>
-      <div class="contact-detail"><div class="contact-type">WhatsApp</div><div class="contact-value">+261 33 417 5026</div></div>
-    </a>
-    <a class="glass contact-card" href="mailto:contact.fy.services@gmail.com?subject=Contact%20depuis%20votre%20site&body=Bonjour%20Fy%2C">
-      <div class="contact-icon">✉️</div>
-      <div class="contact-detail"><div class="contact-type">Email</div><div class="contact-value">contact.fy.services@gmail.com</div></div>
-    </a>
-    <a class="glass contact-card" href="#" target="_blank" rel="noopener">
-      <div class="contact-icon">f</div>
-      <div class="contact-detail"><div class="contact-type">Facebook</div><div class="contact-value" data-fr="Voir mon profil" data-en="View my profile">Voir mon profil</div></div>
-    </a>
-    <div class="glass contact-card">
-      <div class="contact-icon">📍</div>
-      <div class="contact-detail"><div class="contact-type" data-fr="Basé à" data-en="Based in">Basé à</div><div class="contact-value">Moramanga, Madagascar</div></div>
-    </div>
-    <a class="glass contact-card" href="https://github.com/contactfyservices-art" target="_blank" rel="noopener">
-      <div class="contact-icon">💻</div>
-      <div class="contact-detail"><div class="contact-type">GitHub</div><div class="contact-value">github.com/contactfyservices-art</div></div>
-    </a>
-  </div>
-  <form class="contact-form" id="contact-form">
-    <input type="text" name="nom" placeholder="Votre nom" data-fr-ph="Votre nom" data-en-ph="Your name" required />
-    <input type="email" name="email" placeholder="Votre email" data-fr-ph="Votre email" data-en-ph="Your email" required />
-    <textarea name="message" placeholder="Votre message / projet" data-fr-ph="Votre message / projet" data-en-ph="Your message / project" required></textarea>
-    <button type="submit" class="btn btn-primary" data-fr="Envoyer le message" data-en="Send message">Envoyer le message</button>
-  </form>
-</section>
-
-<section class="section reveal" id="autre">
-  <div class="section-head">
-    <div class="section-eyebrow" data-fr="Polyvalence" data-en="Versatility">Polyvalence</div>
-    <h2 data-fr="Au-delà du code" data-en="Beyond the code">Au-delà du code</h2>
-    <p data-fr="Avant et à côté du développement, j'ai un parcours solide en environnement, HSE et gestion de projets — une ouverture d'esprit qui nourrit aussi ma façon de construire des outils numériques." data-en="Alongside development, I have a solid background in environment, HSE and project management — an open-minded, cross-disciplinary approach that also shapes how I build digital tools.">Avant et à côté du développement, j'ai un parcours solide en environnement, HSE et gestion de projets — une ouverture d'esprit qui nourrit aussi ma façon de construire des outils numériques.</p>
-  </div>
-  <div class="capabilities">
-    <div class="glass cap-card">
-      <div class="cap-media green"><img src="images/fy-plantation.png" alt="Fy plantation d'arbre" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="Environnement & biodiversité" data-en="Environment & biodiversity">Environnement & biodiversité</h3><p data-fr="Restauration écologique, revégétalisation, gestion de pépinière et compostage." data-en="Ecological restoration, revegetation, nursery management and composting.">Restauration écologique, revégétalisation, gestion de pépinière et compostage.</p></div>
-    </div>
-    <div class="glass cap-card">
-      <div class="cap-media orange"><img src="images/team-meeting.jpg" alt="HSE & conformité terrain" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="HSE & conformité terrain" data-en="HSE & field compliance">HSE & conformité terrain</h3><p data-fr="Supervision d'équipes, gestion des déchets, inspections et suivi des normes ESS." data-en="Team supervision, waste management, inspections and ESS standards monitoring.">Supervision d'équipes, gestion des déchets, inspections et suivi des normes ESS.</p></div>
-    </div>
-    <div class="glass cap-card">
-      <div class="cap-media blue"><img src="images/growth-chart.png" alt="Analyse & gestion de processus" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="Analyse & gestion de processus" data-en="Business analysis & process management">Analyse & gestion de processus</h3><p data-fr="Certifié Business Analysis & Process Management (Coursera, 2026)." data-en="Certified in Business Analysis & Process Management (Coursera, 2026).">Certifié Business Analysis & Process Management (Coursera, 2026).</p></div>
-    </div>
-    <div class="glass cap-card">
-      <div class="cap-media green"><img src="images/cybersecurite.jpg" alt="Cybersécurité & sensibilisation" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="Cybersécurité & sensibilisation" data-en="Cybersecurity awareness">Cybersécurité & sensibilisation</h3><p data-fr="Certificat Cybercriminalité — ONUDC / SPARK, 2026." data-en="Cybercrime certificate — UNODC / SPARK, 2026.">Certificat Cybercriminalité — ONUDC / SPARK, 2026.</p></div>
-    </div>
-    <div class="glass cap-card">
-      <div class="cap-media orange"><img src="images/feedback-like.png" alt="Interculturel & sécurité psychologique" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="Interculturel & sécurité psychologique" data-en="Intercultural & psychological safety">Interculturel & sécurité psychologique</h3><p data-fr="Compétences interculturelles (UNITAR/OIF) et Sécurité psychologique (UNICEF), 2026." data-en="Intercultural skills (UNITAR/OIF) and Psychological Safety (UNICEF), 2026.">Compétences interculturelles (UNITAR/OIF) et Sécurité psychologique (UNICEF), 2026.</p></div>
-    </div>
-    <div class="glass cap-card">
-      <div class="cap-media blue"><img src="images/agriculture.jpg" alt="Agriculture durable" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="Agriculture durable" data-en="Sustainable agriculture">Agriculture durable</h3><p data-fr="Pratiques d'agriculture durable & normes environnementales, sociales et climatiques (IFDD/OIF, FIDA/OIT), 2026." data-en="Sustainable agriculture practices & environmental, social and climate standards (IFDD/OIF, IFAD/ILO), 2026.">Pratiques d'agriculture durable & normes environnementales, sociales et climatiques (IFDD/OIF, FIDA/OIT), 2026.</p></div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="thanks-msg" data-fr="✦ Merci d'avoir visité mon site — j'espère qu'il vous a plu ! N'hésitez pas à me contacter pour votre prochain projet. ✦" data-en="✦ Thank you for visiting my site — I hope you enjoyed it! Feel free to reach out for your next project. ✦">✦ Merci d'avoir visité mon site — j'espère qu'il vous a plu ! N'hésitez pas à me contacter pour votre prochain projet. ✦</div>
