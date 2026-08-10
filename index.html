@@ -184,6 +184,13 @@
     .navlinks.open{ display:flex; }
     .navlinks a{ text-align:center; }
     .burger{ display:flex; }
+    .logo-text{ display:none; }
+    .nav-right{ gap:6px; }
+    .nav-icons{ gap:5px; }
+    .nav-icon-btn{ width:32px; height:32px; font-size:12px; }
+    .lang-toggle{ padding:3px; gap:2px; margin-left:0; }
+    .lang-btn{ padding:5px 8px; font-size:11px; }
+    .theme-switch{ transform: scale(0.86); transform-origin: center; }
   }
 
   .hero{
@@ -460,21 +467,37 @@
   /* --- Verso de la carte --- */
   .biz-card-back{
     width:460px; aspect-ratio:16/9; border-radius:16px; position:relative; overflow:hidden;
-    background: linear-gradient(150deg,#211a15 0%, #171310 40%, #0c0b0a 100%);
-    border: 2px solid #3352e6;
-    box-shadow:0 30px 70px -18px rgba(51,82,230,0.4), 0 0 0 1px rgba(51,82,230,0.22), 0 0 0 4px rgba(212,175,55,0.28);
+    background: linear-gradient(150deg, rgba(210,205,235,0.30) 0%, rgba(150,140,205,0.24) 45%, rgba(90,80,150,0.30) 100%);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1.5px solid rgba(255,255,255,0.45);
+    box-shadow: 0 30px 70px -18px rgba(90,80,160,0.5), 0 0 0 1px rgba(180,170,230,0.2), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 0 60px rgba(255,255,255,0.10);
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
   }
-  .biz-card-back .biz-rule{ position:relative; z-index:1; width:120px; height:1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.7), transparent); margin-top:6px; }
+  .biz-card-back::before{
+    content:""; position:absolute; top:-60% ; left:-20%; width:60%; height:220%; z-index:0; pointer-events:none;
+    background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0.22) 48%, rgba(255,255,255,0) 66%, transparent 100%);
+    transform: rotate(18deg);
+  }
+  .biz-card-back::after{ border-color: rgba(255,255,255,0.4) !important; }
+  .biz-card-back .biz-rule{ position:relative; z-index:1; width:120px; height:1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.85), transparent); margin-top:6px; }
   .biz-card-back .biz-pattern{
     position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0.9;
     background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='none' stroke='rgba(160,180,255,0.14)' stroke-width='1.3'%3E%3Cpath d='M8 24 H62 V64 H108 V12'/%3E%3Ccircle cx='62' cy='64' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M122 150 H172 V104'/%3E%3Ccircle cx='172' cy='104' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M18 132 V172 H70 V150'/%3E%3C/g%3E%3Ctext x='96' y='40' font-family='monospace' font-size='15' fill='rgba(160,180,255,0.16)'%3E%3C/%3E%3C/text%3E%3Ctext x='6' y='108' font-family='monospace' font-size='13' fill='rgba(160,180,255,0.14)'%3E01%3C/text%3E%3C/svg%3E");
     background-size: 180px 180px; background-repeat: repeat;
   }
-  .biz-card-back .bn{ position:relative; z-index:1; font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:22px; color:#f7f5f0; text-align:center; }
-  .biz-card-back .bt{ position:relative; z-index:1; font-size:11.5px; color:#a79f92; text-align:center; max-width:70%; }
+  .biz-card-back .bn{ position:relative; z-index:1; font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:22px; color:#ffffff; text-align:center; text-shadow: 0 2px 14px rgba(40,30,70,0.55); }
+  .biz-card-back .bt{ position:relative; z-index:1; font-size:11.5px; color:#e4dff5; text-align:center; max-width:70%; text-shadow: 0 1px 8px rgba(40,30,70,0.4); }
 
-  @media (max-width:520px){ .biz-card, .biz-card-back{ width:100%; max-width:400px; } }
+  @media (max-width:520px){
+    .biz-card, .biz-card-back{ width:100%; max-width:400px; }
+    .biz-card{ flex-direction:column; aspect-ratio:auto; }
+    .biz-main{ padding:16px 16px 12px; }
+    .biz-row{ white-space:normal; overflow:visible; text-overflow:clip; }
+    .biz-side{ width:100%; flex-direction:row; flex-wrap:wrap; align-items:flex-start; justify-content:center; border-left:none; border-top:1px solid rgba(212,175,55,0.32); padding:14px 12px; gap:12px; }
+    .biz-tech-row{ width:150px; }
+    .biz-qr-mini{ flex-shrink:0; }
+  }
   @media (max-width:640px){ .biz-side{ width:104px; padding:10px 7px; } .biz-tech-row img{ padding:2px; } .biz-qr-mini img{ width:56px; height:56px; } }
 
   .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
@@ -728,7 +751,7 @@
 <div class="cover-bg"></div>
 
 <nav>
-  <div class="logo"><img src="images/logo-nyah.png" alt="Logo Nyah_ITProg" style="width:30px; height:30px; border-radius:8px; vertical-align:middle; margin-right:2px;" />Nyah_ITProg</div>
+  <div class="logo"><img src="images/logo-nyah.png" alt="Logo Nyah_ITProg" style="width:30px; height:30px; border-radius:8px; vertical-align:middle; margin-right:2px;" /><span class="logo-text">Nyah_ITProg</span></div>
   <div class="nav-right">
     <div class="navlinks" id="nav-links">
       <a href="#apropos" data-fr="À propos" data-en="About">À propos</a>
@@ -1146,7 +1169,7 @@
     </div>
     <div class="glass cap-card">
       <div class="cap-media orange"><img src="images/team-meeting.jpg" alt="HSE & conformité terrain" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
-      <div class="cap-body"><h3 data-fr="HSE & conformité terrain" data-en="HSE & field compliance">HSE & conformité terrain</h3><p data-fr="Supervision d'équipes, gestion des déchets, inspections et suivi des normes ESS." data-en="Team supervision, waste management, inspections and ESS standards monitoring.">Supervision d'équipes, gestion des déchets, inspections et suivi des normes ESS.</p></div>
+      <div class="cap-body"><h3 data-fr="HSE & conformité terrain" data-en="HSE & field compliance">HSE & conformité terrain</h3><p data-fr="Supervision d'équipes, inspections terrain et suivi des normes ESS." data-en="Team supervision, field inspections and ESS standards monitoring.">Supervision d'équipes, inspections terrain et suivi des normes ESS.</p></div>
     </div>
     <div class="glass cap-card">
       <div class="cap-media blue"><img src="images/growth-chart.png" alt="Analyse & gestion de processus" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
