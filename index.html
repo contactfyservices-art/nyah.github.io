@@ -364,7 +364,8 @@
 
   .card-wrap{ display:flex; gap:36px; flex-wrap:wrap; align-items:flex-start; justify-content:center; }
 
-  /* --- Carte de visite PREMIUM noir/marron/gris + motifs IT + bordure bleu roi --- */
+  /* --- Carte de visite PREMIUM noir/marron/gris + motifs IT + bordure bleu roi + liseré or --- */
+  /* Mise en page 2 colonnes : contenu à gauche, panneau QR/motif à droite (plus de zone vide) */
   .biz-card{
     width:460px; aspect-ratio:16/9; border-radius:16px;
     position:relative; overflow:hidden;
@@ -373,23 +374,39 @@
     box-shadow:
       0 30px 70px -18px rgba(51,82,230,0.45),
       0 0 0 1px rgba(51,82,230,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.05);
+      0 0 0 4px rgba(212,175,55,0.28),
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      inset 0 0 40px rgba(212,175,55,0.05);
     transition: transform .35s ease, box-shadow .35s ease;
-    display:flex; flex-direction:column; justify-content:space-between;
-    padding:18px 22px;
+    display:flex; flex-direction:row; align-items:stretch;
   }
   .biz-card:hover{
     transform: translateY(-4px) scale(1.012);
     box-shadow:
       0 36px 84px -14px rgba(51,82,230,0.6),
       0 0 0 1px rgba(90,120,255,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.07);
+      0 0 0 4px rgba(212,175,55,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.08);
   }
+  /* liseré or fin en filigrane, façon carte gravée haut de gamme */
+  .biz-card::after, .biz-card-back::after{
+    content:""; position:absolute; inset:7px; z-index:0; pointer-events:none; border-radius:11px;
+    border: 1px solid rgba(212,175,55,0.35);
+  }
+  /* balayage lumineux "foil" façon carte premium (discret, sans texte) */
+  .biz-card .biz-shine{ position:absolute; inset:0; z-index:2; pointer-events:none; overflow:hidden; border-radius:inherit; }
+  .biz-card .biz-shine::before{
+    content:""; position:absolute; top:-60%; left:-70%; width:38%; height:220%;
+    background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0) 38%, rgba(255,224,150,0.4) 50%, rgba(255,255,255,0) 62%, transparent 100%);
+    transform: rotate(18deg);
+    animation: vipShine 5s ease-in-out infinite;
+  }
+  @keyframes vipShine{ 0%{ left:-70%; } 50%{ left:130%; } 100%{ left:130%; } }
   /* motifs IT en filigrane (circuits + symboles code) */
   .biz-card .biz-pattern{
     position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0.9;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='none' stroke='rgba(160,180,255,0.14)' stroke-width='1.3'%3E%3Cpath d='M8 24 H62 V64 H108 V12'/%3E%3Ccircle cx='62' cy='64' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M122 150 H172 V104'/%3E%3Ccircle cx='172' cy='104' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M18 132 V172 H70 V150'/%3E%3Ccircle cx='18' cy='132' r='2.6' fill='rgba(160,180,255,0.2)' stroke='none'/%3E%3C/g%3E%3Ctext x='96' y='40' font-family='monospace' font-size='15' fill='rgba(160,180,255,0.16)'%3E%3C/%3E%3C/text%3E%3Ctext x='6' y='108' font-family='monospace' font-size='13' fill='rgba(160,180,255,0.14)'%3E01%3C/text%3E%3Ctext x='132' y='58' font-family='monospace' font-size='13' fill='rgba(160,180,255,0.14)'%3E%7B%7D%3C/text%3E%3C/svg%3E");
-    background-size: 180px 180px; background-repeat: repeat;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='none' stroke='rgba(160,180,255,0.14)' stroke-width='1.3'%3E%3Cpath d='M8 24 H62 V64 H108 V12'/%3E%3Ccircle cx='62' cy='64' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M122 150 H172 V104'/%3E%3Ccircle cx='172' cy='104' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M18 132 V172 H70 V150'/%3E%3Ccircle cx='18' cy='132' r='2.6' fill='rgba(160,180,255,0.2)' stroke='none'/%3E%3C/g%3E%3Ctext x='96' y='40' font-family='monospace' font-size='15' fill='rgba(160,180,255,0.16)'%3E%3C/%3E%3C/text%3E%3Ctext x='6' y='108' font-family='monospace' font-size='13' fill='rgba(160,180,255,0.14)'%3E01%3C/text%3E%3Ctext x='132' y='58' font-family='monospace' font-size='13' fill='rgba(160,180,255,0.14)'%3E%7B%7D%3C/text%3E%3C/svg%3E"), radial-gradient(circle at 85% 90%, rgba(212,175,55,0.10), transparent 60%);
+    background-size: 180px 180px, 100% 100%; background-repeat: repeat, no-repeat;
   }
   .biz-card .biz-glow{
     position:absolute; z-index:0; pointer-events:none;
@@ -397,35 +414,51 @@
     background: radial-gradient(circle, rgba(51,82,230,0.28), transparent 68%);
     filter: blur(10px);
   }
-  /* en-tête : logo + QR */
-  .biz-head{ position:relative; z-index:1; display:flex; justify-content:space-between; align-items:flex-start; }
+  /* colonne principale (identité + contact) */
+  .biz-main{ position:relative; z-index:1; flex:1 1 auto; min-width:0; display:flex; flex-direction:column; justify-content:space-between; padding:16px 18px; }
+  /* en-tête : logo */
+  .biz-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
   .biz-brand .bn{ font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:16px; color:#f3f0ea; letter-spacing:.01em; }
   .biz-brand .bt{ font-size:9.5px; color:#a79f92; margin-top:2px; letter-spacing:.02em; }
-  .biz-qr-mini{ display:flex; flex-direction:column; align-items:center; gap:5px; }
-  .biz-qr-mini img{ width:62px; height:62px; border-radius:6px; background:#fff; padding:4px; box-shadow:0 8px 18px -6px rgba(0,0,0,0.6); }
-  .biz-qr-mini .biz-qr-label{ font-size:7.5px; font-weight:800; letter-spacing:.04em; color:#171310; background:#f3f0ea; border-radius:4px; padding:2px 6px; white-space:nowrap; }
   /* identité : photo + nom */
-  .biz-identity{ position:relative; z-index:1; display:flex; align-items:center; gap:16px; }
+  .biz-identity{ display:flex; align-items:center; gap:14px; }
   .biz-card .biz-photo{
-    width:78px; height:78px; border-radius:50%; overflow:hidden; flex-shrink:0;
-    border:3px solid #3352e6; box-shadow:0 8px 20px -6px rgba(51,82,230,0.6);
+    width:72px; height:72px; border-radius:50%; overflow:hidden; flex-shrink:0;
+    border:3px solid #3352e6; box-shadow:0 8px 20px -6px rgba(51,82,230,0.6), 0 0 0 3px rgba(212,175,55,0.55);
   }
-  .biz-card .biz-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .biz-identity-text h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; color:#f7f5f0; line-height:1.15; }
-  .biz-identity-text .biz-role{ font-size:11.5px; font-weight:700; color:#8fa0ff; letter-spacing:.03em; margin-top:3px; }
-  /* contact : grille 2 colonnes */
-  .biz-lines{ position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:5px 14px; }
-  .biz-row{ display:flex; align-items:center; gap:7px; font-size:10.3px; line-height:1.25; color:#d8d3c9; font-family:'Quicksand', sans-serif; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .biz-card .biz-photo img{ width:100%; height:100%; object-fit:cover; object-position:center 8%; display:block; }
+  .biz-identity-text h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18.5px; color:#f7f5f0; line-height:1.15; }
+  .biz-identity-text .biz-role{ font-size:11px; font-weight:700; color:#8fa0ff; letter-spacing:.03em; margin-top:3px; }
+  /* contact : une colonne, bien lisible sur la largeur réduite de la zone principale */
+  .biz-lines{ display:flex; flex-direction:column; gap:5px; }
+  .biz-row{ display:flex; align-items:center; gap:7px; font-size:10.6px; line-height:1.25; color:#d8d3c9; font-family:'Quicksand', sans-serif; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .biz-row .bi{ width:18px; height:18px; border-radius:50%; background:rgba(51,82,230,0.22); display:flex; align-items:center; justify-content:center; font-size:9.5px; flex-shrink:0; }
+
+  /* colonne latérale droite : icônes des technos utilisées + QR, comble l'espace vide */
+  .biz-side{
+    position:relative; z-index:1; flex-shrink:0; width:132px;
+    display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+    padding:14px 12px; text-align:center; gap:8px;
+    background: linear-gradient(180deg, rgba(212,175,55,0.14), rgba(51,82,230,0.10) 55%, rgba(212,175,55,0.10));
+    border-left: 1px solid rgba(212,175,55,0.32);
+  }
+  .biz-tech-row{ position:relative; z-index:1; display:grid; grid-template-columns:repeat(4,1fr); gap:5px; width:100%; }
+  .biz-tech-row img{ width:100%; aspect-ratio:1/1; object-fit:contain; background:rgba(243,240,234,0.94); border-radius:6px; padding:3px; box-shadow:0 3px 8px -3px rgba(0,0,0,0.5); }
+  .biz-tech-row .bt-emoji{ width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:15px; background:rgba(243,240,234,0.94); border-radius:6px; box-shadow:0 3px 8px -3px rgba(0,0,0,0.5); }
+  .biz-tech-label{ position:relative; z-index:1; font-size:7px; font-weight:700; letter-spacing:.03em; color:#c9c2b3; text-transform:uppercase; margin-top:-2px; }
+  .biz-qr-mini{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .biz-qr-mini img{ width:70px; height:70px; border-radius:8px; background:#fff; padding:5px; box-shadow:0 8px 18px -6px rgba(0,0,0,0.6); border:1px solid rgba(212,175,55,0.55); }
+  .biz-qr-mini .biz-qr-label{ font-size:7.5px; font-weight:800; letter-spacing:.06em; color:#171310; background:#f3f0ea; border-radius:4px; padding:2px 7px; white-space:nowrap; }
 
   /* --- Verso de la carte --- */
   .biz-card-back{
     width:460px; aspect-ratio:16/9; border-radius:16px; position:relative; overflow:hidden;
     background: linear-gradient(150deg,#211a15 0%, #171310 40%, #0c0b0a 100%);
     border: 2px solid #3352e6;
-    box-shadow:0 30px 70px -18px rgba(51,82,230,0.4), 0 0 0 1px rgba(51,82,230,0.22);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    box-shadow:0 30px 70px -18px rgba(51,82,230,0.4), 0 0 0 1px rgba(51,82,230,0.22), 0 0 0 4px rgba(212,175,55,0.28);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
   }
+  .biz-card-back .biz-rule{ position:relative; z-index:1; width:120px; height:1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.7), transparent); margin-top:6px; }
   .biz-card-back .biz-pattern{
     position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0.9;
     background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='none' stroke='rgba(160,180,255,0.14)' stroke-width='1.3'%3E%3Cpath d='M8 24 H62 V64 H108 V12'/%3E%3Ccircle cx='62' cy='64' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M122 150 H172 V104'/%3E%3Ccircle cx='172' cy='104' r='3' fill='rgba(160,180,255,0.22)' stroke='none'/%3E%3Cpath d='M18 132 V172 H70 V150'/%3E%3C/g%3E%3Ctext x='96' y='40' font-family='monospace' font-size='15' fill='rgba(160,180,255,0.16)'%3E%3C/%3E%3C/text%3E%3Ctext x='6' y='108' font-family='monospace' font-size='13' fill='rgba(160,180,255,0.14)'%3E01%3C/text%3E%3C/svg%3E");
@@ -435,6 +468,7 @@
   .biz-card-back .bt{ position:relative; z-index:1; font-size:11.5px; color:#a79f92; text-align:center; max-width:70%; }
 
   @media (max-width:520px){ .biz-card, .biz-card-back{ width:100%; max-width:400px; } }
+  @media (max-width:640px){ .biz-side{ width:104px; padding:10px 7px; } .biz-tech-row img{ padding:2px; } .biz-qr-mini img{ width:56px; height:56px; } }
 
   .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
   .gallery-card{ padding:14px; text-align:center; transition: transform .25s ease, border-color .25s ease; }
@@ -585,6 +619,24 @@
   .settings-row{ display:flex; align-items:center; justify-content:space-between; font-size:13.5px; color: var(--text-dim); cursor:pointer; }
   .settings-row input{ accent-color: var(--accent); width:16px; height:16px; cursor:pointer; }
 
+  /* --- Interrupteur mode sombre / clair, à côté des icônes recherche & réglages --- */
+  .theme-switch{ position:relative; display:inline-flex; align-items:center; cursor:pointer; flex-shrink:0; }
+  .theme-switch input{ position:absolute; opacity:0; width:1px; height:1px; }
+  .ts-track{
+    width:50px; height:28px; border-radius:999px; background: var(--glass-strong);
+    border:1px solid var(--glass-border); position:relative; display:flex; align-items:center; padding:0 3px;
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .ts-thumb{
+    width:22px; height:22px; border-radius:50%; background: linear-gradient(150deg,#2f3550,#171a2a);
+    display:flex; align-items:center; justify-content:center; font-size:12px; line-height:1;
+    transform: translateX(0); transition: transform .3s cubic-bezier(.4,0,.2,1), background .3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+  }
+  .theme-switch input:checked ~ .ts-track{ background: linear-gradient(90deg,#bcd6ff,#eef6ff); border-color: rgba(0,120,180,0.32); }
+  .theme-switch input:checked ~ .ts-track .ts-thumb{ transform: translateX(22px); background: linear-gradient(150deg,#ffe9a8,#ffb347); }
+  .theme-switch input:focus-visible ~ .ts-track{ outline: 1px solid var(--accent); outline-offset:2px; }
+
   /* --- Thème clair global (bascule complète, tout reste sombre par défaut) --- */
   body.theme-light{
     --bg-1: #f4f6fb;
@@ -688,6 +740,10 @@
     </div>
     <div class="nav-icons">
       <div class="nav-icon-btn" id="search-btn" title="Rechercher sur le site" aria-label="Rechercher">🔍</div>
+      <label class="theme-switch" title="Mode sombre / clair" aria-label="Changer de thème">
+        <input type="checkbox" id="toggle-theme-nav" />
+        <span class="ts-track"><span class="ts-thumb" id="ts-thumb-icon">🌙</span></span>
+      </label>
       <div class="nav-icon-btn" id="settings-btn" title="Réglages d'affichage" aria-label="Réglages">⚙️</div>
     </div>
     <div class="burger" id="burger-btn" aria-label="Menu"><span></span><span></span><span></span></div>
@@ -701,7 +757,6 @@
 
 <div class="settings-panel glass" id="settings-panel">
   <div class="settings-title">Affichage</div>
-  <label class="settings-row"><span data-fr="Mode clair" data-en="Light mode">Mode clair</span><input type="checkbox" id="toggle-theme" /></label>
   <label class="settings-row"><span>Réduire les animations</span><input type="checkbox" id="toggle-reduce-motion" /></label>
   <label class="settings-row"><span>Fond quadrillé</span><input type="checkbox" id="toggle-grid-bg" checked /></label>
 </div>
@@ -933,29 +988,47 @@
     <div class="biz-card" id="biz-card">
       <div class="biz-pattern"></div>
       <div class="biz-glow"></div>
-      <div class="biz-head">
-        <div class="biz-brand">
-          <div class="bn">Nyah_ITProg</div>
-          <div class="bt" data-fr="Web · Mobile · Logiciels" data-en="Web · Mobile · Software">Web · Mobile · Logiciels</div>
+      <div class="biz-shine"></div>
+      <div class="biz-main">
+        <div class="biz-head">
+          <div class="biz-brand">
+            <div class="bn">Nyah_ITProg</div>
+            <div class="bt" data-fr="Web · Mobile · Logiciels" data-en="Web · Mobile · Software">Web · Mobile · Logiciels</div>
+          </div>
+        </div>
+        <div class="biz-identity">
+          <div class="biz-photo"><img src="images/fy-identite.jpg" alt="Fy Andrianantenaina" crossorigin="anonymous" /></div>
+          <div class="biz-identity-text">
+            <h3>Fy Andrianantenaina</h3>
+            <div class="biz-role" data-fr="IT PROGRAMMEUR" data-en="IT PROGRAMMER">IT PROGRAMMEUR</div>
+          </div>
+        </div>
+        <div class="biz-lines">
+          <div class="biz-row"><span class="bi">☎</span>+261 32 296 1155</div>
+          <div class="biz-row"><span class="bi">💬</span>+261 33 417 5026</div>
+          <div class="biz-row"><span class="bi">✉</span>contact.fy.services@gmail.com</div>
+          <div class="biz-row"><span class="bi">🌐</span>finaritra.pages.dev</div>
+          <div class="biz-row"><span class="bi">📍</span>Moramanga, Madagascar</div>
+        </div>
+      </div>
+      <div class="biz-side">
+        <div class="biz-tech-label" data-fr="Technos & services" data-en="Tech & services">Technos &amp; services</div>
+        <div class="biz-tech-row">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+        </div>
+        <div class="biz-tech-row">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" />
+          <div class="bt-emoji" title="Automatisation">⚙️</div>
+          <div class="bt-emoji" title="Maintenance">🔧</div>
         </div>
         <div class="biz-qr-mini">
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://finaritra.pages.dev&color=0b0e17&bgcolor=ffffff" alt="QR finaritra.pages.dev" crossorigin="anonymous" />
           <div class="biz-qr-label" data-fr="SCANNEZ-MOI" data-en="SCAN ME">SCANNEZ-MOI</div>
         </div>
-      </div>
-      <div class="biz-identity">
-        <div class="biz-photo"><img src="images/fy-identite.jpg" alt="Fy Andrianantenaina" crossorigin="anonymous" /></div>
-        <div class="biz-identity-text">
-          <h3>Fy Andrianantenaina</h3>
-          <div class="biz-role" data-fr="IT PROGRAMMEUR" data-en="IT PROGRAMMER">IT PROGRAMMEUR</div>
-        </div>
-      </div>
-      <div class="biz-lines">
-        <div class="biz-row"><span class="bi">☎</span>+261 32 296 1155</div>
-        <div class="biz-row"><span class="bi">💬</span>+261 33 417 5026</div>
-        <div class="biz-row"><span class="bi">✉</span>contact.fy.services@gmail.com</div>
-        <div class="biz-row"><span class="bi">🌐</span>finaritra.pages.dev</div>
-        <div class="biz-row" style="grid-column:1/-1;"><span class="bi">📍</span>Moramanga, Madagascar</div>
       </div>
     </div>
 
@@ -963,6 +1036,7 @@
       <div class="biz-pattern"></div>
       <div class="bn">Nyah_ITProg</div>
       <div class="bt" data-fr="Fy ANDRIANANTENAINA — IT Programmeur" data-en="Fy ANDRIANANTENAINA — IT Programmer">Fy ANDRIANANTENAINA — IT Programmeur</div>
+      <div class="biz-rule"></div>
     </div>
 
     <div class="qr-box">
@@ -1184,11 +1258,21 @@ document.addEventListener('DOMContentLoaded', function(){
     searchInput.addEventListener('input', function(){ renderResults(searchInput.value); });
   }
 
+  // --- Interrupteur sombre / clair, juste à côté des icônes recherche & réglages ---
+  // Sombre par défaut : aucune classe "theme-light" tant que l'utilisateur n'a pas basculé.
+  var themeToggleNav = document.getElementById('toggle-theme-nav');
+  var tsThumbIcon = document.getElementById('ts-thumb-icon');
+  function setTheme(isLight){
+    document.body.classList.toggle('theme-light', isLight);
+    if(themeToggleNav) themeToggleNav.checked = isLight;
+    if(tsThumbIcon) tsThumbIcon.textContent = isLight ? '☀️' : '🌙';
+  }
+  if(themeToggleNav){ themeToggleNav.addEventListener('change', function(){ setTheme(themeToggleNav.checked); }); }
+  setTheme(false); // état par défaut : mode sombre
+
   // --- Icône réglages : contrôle du confort visuel de la page ---
-  var themeToggle = document.getElementById('toggle-theme');
   var motionToggle = document.getElementById('toggle-reduce-motion');
   var gridToggle = document.getElementById('toggle-grid-bg');
-  if(themeToggle){ themeToggle.addEventListener('change', function(){ document.body.classList.toggle('theme-light', themeToggle.checked); }); }
   if(motionToggle){ motionToggle.addEventListener('change', function(){ document.body.classList.toggle('reduce-motion', motionToggle.checked); }); }
   if(gridToggle){ gridToggle.addEventListener('change', function(){ document.body.classList.toggle('hide-grid', !gridToggle.checked); }); }
 
