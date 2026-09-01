@@ -258,6 +258,15 @@
   .cap-card h3{ font-size:15.5px; margin-bottom:6px; }
   .cap-card p{ font-size:13.5px; color: var(--text-dim); }
 
+  .cv-download-card{
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    padding:28px 30px;
+  }
+  .cv-download-info h3{ font-size:18px; margin-bottom:6px; }
+  .cv-download-info p{ font-size:14px; color: var(--text-dim); max-width:52ch; }
+  .cv-download-info .cv-download-meta{ margin-top:8px; font-size:12.5px; color: var(--accent); font-weight:600; }
+  @media (max-width:640px){ .cv-download-card{ flex-direction:column; align-items:flex-start; text-align:left; } }
+
   .portfolio-list{ display:flex; flex-direction:column; gap: 20px; }
   .project{ padding: 26px; display:grid; grid-template-columns: 1fr auto; gap: 20px; align-items:center; transition: box-shadow .25s ease; }
   @media (max-width: 640px){ .project{ grid-template-columns: 1fr; } }
@@ -654,6 +663,7 @@
       <a href="#temoignages" data-fr="Témoignages" data-en="Testimonials">Témoignages</a>
       <a href="#galerie" data-fr="Galerie" data-en="Gallery">Galerie</a>
       <a href="#carte" data-fr="Carte de visite" data-en="Business card">Carte de visite</a>
+      <a href="#cv" data-fr="Mon CV" data-en="My résumé">Mon CV</a>
       <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
       <a href="#autre" data-fr="Autre" data-en="Other">Autre</a>
     </div>
@@ -815,6 +825,18 @@
       <div class="cap-media blue"><img src="images/website-mockup.webp" alt="Pages web" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;" /></div>
       <div class="cap-body"><h3 data-fr="Pages web sur mesure" data-en="Custom web pages">Pages web sur mesure</h3><p data-fr="Création de pages web autonomes : landing pages, cartes numériques, mini-sites interactifs." data-en="Standalone web pages: landing pages, digital cards, interactive mini-sites.">Création de pages web autonomes : landing pages, cartes numériques, mini-sites interactifs.</p></div>
     </div>
+    <div class="glass cap-card">
+      <div class="cap-media blue" style="font-size:52px;">🎙️</div>
+      <div class="cap-body"><h3 data-fr="Transcription audio" data-en="Audio transcription">Transcription audio</h3><p data-fr="Transcription verbatim et clean verbatim de contenus audio/vidéo en anglais, avec formatage des intervenants et respect des guides de style client." data-en="Verbatim and clean verbatim transcription of English audio/video content, with speaker formatting and adherence to client style guides.">Transcription verbatim et clean verbatim de contenus audio/vidéo en anglais, avec formatage des intervenants et respect des guides de style client.</p></div>
+    </div>
+    <div class="glass cap-card">
+      <div class="cap-media orange" style="font-size:52px;">🌐</div>
+      <div class="cap-body"><h3 data-fr="Traduction anglais ↔ français" data-en="English ↔ French translation">Traduction anglais ↔ français</h3><p data-fr="Traduction et relecture film/broadcast, conventions France & Canada, anglais US & UK, glossaires et cohérence terminologique." data-en="Film/broadcast translation & proofreading, France & Canada conventions, US & UK English, glossaries and terminology consistency.">Traduction et relecture film/broadcast, conventions France & Canada, anglais US & UK, glossaires et cohérence terminologique.</p></div>
+    </div>
+    <div class="glass cap-card">
+      <div class="cap-media green" style="font-size:52px;">💬</div>
+      <div class="cap-body"><h3 data-fr="Sous-titrage" data-en="Subtitling">Sous-titrage</h3><p data-fr="Sous-titrage précis au timecode depuis 2024, sur logiciels cloud dédiés, pour interviews, conversations et contenus structurés." data-en="Timecode-accurate subtitling since 2024, using dedicated cloud subtitling software, for interviews, conversations and structured content.">Sous-titrage précis au timecode depuis 2024, sur logiciels cloud dédiés, pour interviews, conversations et contenus structurés.</p></div>
+    </div>
   </div>
 </section>
 
@@ -961,6 +983,22 @@
         <a href="images/mockup-device-3.webp" download="Nyah_ITProg-business-card-EN.png" class="btn btn-ghost">English</a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section reveal" id="cv">
+  <div class="section-head">
+    <div class="section-eyebrow" data-fr="Mon CV" data-en="My résumé">Mon CV</div>
+    <h2 data-fr="Vous recrutez en freelance ?" data-en="Hiring a freelancer?">Vous recrutez en freelance ?</h2>
+    <p data-fr="Transcription audio, sous-titrage, traduction anglais ↔ français, ou développement logiciel — téléchargez mon CV complet au format PDF." data-en="Audio transcription, subtitling, English ↔ French translation, or software development — download my full résumé as a PDF.">Transcription audio, sous-titrage, traduction anglais ↔ français, ou développement logiciel — téléchargez mon CV complet au format PDF.</p>
+  </div>
+  <div class="glass cv-download-card">
+    <div class="cv-download-info">
+      <h3 data-fr="Tafita Finaritra Andrianantenaina" data-en="Tafita Finaritra Andrianantenaina">Tafita Finaritra Andrianantenaina</h3>
+      <p data-fr="Transcripteur audio, sous-titreur & traducteur professionnel — également développeur logiciel." data-en="Professional audio transcriber, subtitler & translator — also a software developer.">Transcripteur audio, sous-titreur & traducteur professionnel — également développeur logiciel.</p>
+      <p class="cv-download-meta" data-fr="PDF · disponible immédiatement, à distance" data-en="PDF · available immediately, remote">PDF · disponible immédiatement, à distance</p>
+    </div>
+    <a class="btn btn-primary" href="cv/CV_Andrianantenaina_Tafita_Finaritra.pdf" download="CV_Andrianantenaina_Tafita_Finaritra.pdf" data-fr="Télécharger mon CV (PDF)" data-en="Download my résumé (PDF)">Télécharger mon CV (PDF)</a>
   </div>
 </section>
 
