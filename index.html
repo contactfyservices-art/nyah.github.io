@@ -127,7 +127,7 @@
   .navlinks a{ padding: 9px 14px; border-radius: 999px; transition: background .2s ease, color .2s ease; white-space:nowrap; }
   .navlinks a:hover{ background: var(--glass-strong); color: var(--text); }
   .nav-icons{ display:flex; gap:8px; }
-  .nav-icon-btn{ width:38px; height:38px; border-radius:10px; background:var(--glass-strong); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+  .nav-icon-btn{ width:38px; height:38px; border-radius:10px; background:var(--glass-strong); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; color: var(--text); }
 
   .device-stage{ position:relative; width:100%; max-width:460px; min-height:340px; display:flex; align-items:center; justify-content:center; }
   .device-stage::before{
@@ -566,7 +566,7 @@
   }
   .ts-thumb{
     width:22px; height:22px; border-radius:50%; background: linear-gradient(150deg,#2f3550,#171a2a);
-    display:flex; align-items:center; justify-content:center; font-size:12px; line-height:1;
+    display:flex; align-items:center; justify-content:center; font-size:12px; line-height:1; color:#fff;
     transform: translateX(0); transition: transform .3s cubic-bezier(.4,0,.2,1), background .3s ease;
     box-shadow: 0 2px 6px rgba(0,0,0,0.45);
   }
@@ -672,16 +672,16 @@
       <a href="#autre" data-fr="Autre" data-en="Other">Autre</a>
     </div>
     <div class="nav-icons">
-      <div class="nav-icon-btn" id="search-btn" title="Rechercher sur le site" aria-label="Rechercher">🔍</div>
+      <div class="nav-icon-btn" id="search-btn" title="Rechercher sur le site" aria-label="Rechercher"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg></div>
       <div class="lang-toggle">
         <button class="lang-btn active" data-lang="fr">FR</button>
         <button class="lang-btn" data-lang="en">EN</button>
       </div>
       <label class="theme-switch" title="Mode sombre / clair" aria-label="Changer de thème">
         <input type="checkbox" id="toggle-theme-nav" />
-        <span class="ts-track"><span class="ts-thumb" id="ts-thumb-icon">🌙</span></span>
+        <span class="ts-track"><span class="ts-thumb" id="ts-thumb-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M20 14.5a8.5 8.5 0 0 1-11-11 8.5 8.5 0 1 0 11 11z"/></svg></span></span>
       </label>
-      <div class="nav-icon-btn" id="settings-btn" title="Réglages d'affichage" aria-label="Réglages">⚙️</div>
+      <div class="nav-icon-btn" id="settings-btn" title="Réglages d'affichage" aria-label="Réglages"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
     </div>
     <div class="burger" id="burger-btn" aria-label="Menu"><span></span><span></span><span></span></div>
   </div>
@@ -759,23 +759,23 @@
 
   <div class="flex-strip">
     <div class="flex-thumb">
-      <div class="flex-thumb-top">🌐</div>
+      <div class="flex-thumb-top"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="4"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c3.2 3 3.2 15 0 18M12 3c-3.2 3-3.2 15 0 18"/></svg></div>
       <div class="flex-thumb-body"><h5 data-fr="Sites web" data-en="Websites">Sites web</h5><p data-fr="Vitrines & portfolios sur mesure" data-en="Custom showcase sites & portfolios">Vitrines & portfolios sur mesure</p></div>
     </div>
     <div class="flex-thumb">
-      <div class="flex-thumb-top">📱</div>
+      <div class="flex-thumb-top"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="10.5" y1="18.5" x2="13.5" y2="18.5"/></svg></div>
       <div class="flex-thumb-body"><h5 data-fr="Apps Flutter" data-en="Flutter apps">Apps Flutter</h5><p data-fr="Mobiles multiplateformes" data-en="Cross-platform mobile apps">Mobiles multiplateformes</p></div>
     </div>
     <div class="flex-thumb">
-      <div class="flex-thumb-top">💻</div>
+      <div class="flex-thumb-top"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><line x1="2" y1="20" x2="22" y2="20"/><line x1="9" y1="20" x2="9" y2="16.5"/><line x1="15" y1="20" x2="15" y2="16.5"/></svg></div>
       <div class="flex-thumb-body"><h5 data-fr="Logiciels Python" data-en="Python software">Logiciels Python</h5><p data-fr="Gestion, automatisation" data-en="Management, automation">Gestion, automatisation</p></div>
     </div>
     <div class="flex-thumb">
-      <div class="flex-thumb-top">🎨</div>
+      <div class="flex-thumb-top"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2s-.6-1.5-.6-2.4c0-1.3 1-2.1 2.2-2.1H17a4 4 0 0 0 4-4c0-4.4-4-7.5-9-7.5z"/><circle cx="7.5" cy="10.5" r="1.1" fill="#fff"/><circle cx="11" cy="7" r="1.1" fill="#fff"/><circle cx="15.5" cy="8" r="1.1" fill="#fff"/></svg></div>
       <div class="flex-thumb-body"><h5 data-fr="UI/UX Design" data-en="UI/UX Design">UI/UX Design</h5><p data-fr="Interfaces claires & rapides" data-en="Clear & fast interfaces">Interfaces claires & rapides</p></div>
     </div>
     <div class="flex-thumb">
-      <div class="flex-thumb-top">✉️</div>
+      <div class="flex-thumb-top"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3 6.5l9 7 9-7"/></svg></div>
       <div class="flex-thumb-body"><h5 data-fr="Contact" data-en="Contact">Contact</h5><p data-fr="Discutons de votre projet" data-en="Let's discuss your project">Discutons de votre projet</p></div>
     </div>
   </div>
@@ -1228,7 +1228,9 @@ document.addEventListener('DOMContentLoaded', function(){
   function setTheme(isLight){
     document.body.classList.toggle('theme-light', isLight);
     if(themeToggleNav) themeToggleNav.checked = isLight;
-    if(tsThumbIcon) tsThumbIcon.textContent = isLight ? '☀️' : '🌙';
+    if(tsThumbIcon) tsThumbIcon.innerHTML = isLight
+      ? '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><circle cx="12" cy="12" r="5"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></g></svg>'
+      : '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M20 14.5a8.5 8.5 0 0 1-11-11 8.5 8.5 0 1 0 11 11z"/></svg>';
     localStorage.setItem('theme-light', isLight ? '1' : '0');
   }
   if(themeToggleNav){ themeToggleNav.addEventListener('change', function(){ setTheme(themeToggleNav.checked); }); }
@@ -1280,11 +1282,15 @@ document.addEventListener('DOMContentLoaded', function(){
       try { return JSON.parse(localStorage.getItem(key + '-votes') || '[]'); }
       catch(e){ return []; }
     }
+    function getAverage(){
+      var allVotes = seedVotes.concat(getMyVotes());
+      if(allVotes.length === 0) return 0;
+      return allVotes.reduce(function(a,b){ return a+b; }, 0) / allVotes.length;
+    }
     function paintAverage(){
       var allVotes = seedVotes.concat(getMyVotes());
       if(allVotes.length === 0){ avgEl.textContent = '—'; return; }
-      var avg = allVotes.reduce(function(a,b){ return a+b; }, 0) / allVotes.length;
-      avgEl.textContent = avg.toFixed(1) + ' (' + allVotes.length + ')';
+      avgEl.textContent = getAverage().toFixed(1) + ' (' + allVotes.length + ')';
     }
     function paintStars(activeValue){
       starEls.forEach(function(s){
@@ -1294,14 +1300,15 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     var myVote = parseInt(localStorage.getItem(key + '-myvote') || '0', 10);
-    paintStars(myVote);
+    var displayValue = myVote > 0 ? myVote : Math.round(getAverage());
+    paintStars(displayValue);
     paintAverage();
     if(voteNote) voteNote.style.display = myVote > 0 ? '' : 'none';
 
     starEls.forEach(function(s){
       var v = parseInt(s.getAttribute('data-star'), 10);
       s.addEventListener('mouseenter', function(){ paintStars(v); });
-      s.addEventListener('mouseleave', function(){ paintStars(myVote); });
+      s.addEventListener('mouseleave', function(){ paintStars(displayValue); });
       s.addEventListener('click', function(){
         var votes = getMyVotes();
         if(myVote > 0){
@@ -1310,9 +1317,10 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         votes.push(v);
         myVote = v;
+        displayValue = v;
         localStorage.setItem(key + '-votes', JSON.stringify(votes));
         localStorage.setItem(key + '-myvote', String(myVote));
-        paintStars(myVote);
+        paintStars(displayValue);
         paintAverage();
         if(voteNote) voteNote.style.display = '';
       });
