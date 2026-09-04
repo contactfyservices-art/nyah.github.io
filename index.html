@@ -270,6 +270,69 @@
   .cv-download-info .cv-download-meta{ margin-top:8px; font-size:12.5px; color: var(--accent); font-weight:600; }
   @media (max-width:640px){ .cv-download-card{ flex-direction:column; align-items:flex-start; text-align:left; } }
 
+  /* --- Actualités (posts publics) --- */
+  .posts-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:22px; }
+  .post-card{ padding:20px; overflow:hidden; }
+  .post-card img{ width:100%; border-radius:12px; margin-bottom:14px; object-fit:cover; max-height:220px; }
+  .post-card h3{ font-size:16px; margin-bottom:8px; }
+  .post-card .post-body{ font-size:13.5px; color: var(--text-dim); line-height:1.6; word-wrap:break-word; }
+  .post-card .post-date{ font-size:11.5px; color: var(--text-dim); opacity:.7; margin-top:10px; }
+  .posts-empty{ color: var(--text-dim); font-size:14px; grid-column: 1/-1; text-align:center; padding:20px; }
+
+  /* --- Admin --- */
+  .admin-link-wrap{ margin-top:14px; }
+  .admin-link-btn{
+    background:none; border:1px solid var(--glass-border); color: var(--text-dim); font-size:11.5px;
+    padding:7px 16px; border-radius:999px; cursor:pointer; opacity:.55; transition: opacity .2s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .admin-link-btn:hover{ opacity:1; }
+  .admin-overlay{
+    position:fixed; inset:0; background:rgba(5,8,16,0.72); backdrop-filter: blur(6px);
+    display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px;
+  }
+  .admin-modal{ width:100%; max-width:420px; padding:28px; position:relative; max-height:88vh; overflow-y:auto; }
+  .admin-modal.admin-editor{ max-width:600px; }
+  .admin-modal h3{ font-size:18px; margin-bottom:6px; }
+  .admin-modal p{ font-size:13px; color: var(--text-dim); margin-bottom:14px; }
+  .admin-close{
+    position:absolute; top:14px; right:14px; background:none; border:none; color: var(--text-dim);
+    font-size:16px; cursor:pointer; width:28px; height:28px;
+  }
+  .admin-input{
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--glass-border);
+    background: var(--glass); color: var(--text); font-size:14px; font-family:'Inter',sans-serif; margin-bottom:10px;
+  }
+  .admin-error{ color:#ff6b81; font-size:12.5px; margin-top:8px; }
+  .editor-toolbar{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px; }
+  .editor-toolbar button{
+    width:32px; height:32px; border-radius:8px; border:1px solid var(--glass-border); background: var(--glass);
+    color: var(--text); cursor:pointer; font-size:13px;
+  }
+  .editor-toolbar select{
+    padding:6px 8px; border-radius:8px; border:1px solid var(--glass-border); background: var(--glass);
+    color: var(--text); font-size:12.5px;
+  }
+  .editor-toolbar input[type=color]{ width:32px; height:32px; border-radius:8px; border:1px solid var(--glass-border); padding:2px; background:none; cursor:pointer; }
+  .post-editor{
+    min-height:140px; border:1px solid var(--glass-border); border-radius:10px; padding:12px 14px;
+    background: var(--glass); color: var(--text); font-size:14px; line-height:1.6; margin-bottom:6px;
+  }
+  .post-editor:empty:before{ content: attr(data-placeholder); color: var(--text-dim); opacity:.6; }
+  .admin-file-label{
+    display:inline-block; margin-top:10px; padding:9px 16px; border-radius:999px; border:1px solid var(--glass-border);
+    background: var(--glass); font-size:13px; cursor:pointer;
+  }
+  .admin-panel-divider{ height:1px; background: var(--glass-border); margin:22px 0 16px; }
+  .admin-post-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0;
+    border-bottom:1px solid var(--glass-border); font-size:13px;
+  }
+  .admin-post-row button{
+    background:none; border:1px solid rgba(255,107,129,0.4); color:#ff6b81; border-radius:8px;
+    padding:5px 10px; font-size:12px; cursor:pointer;
+  }
+
   .portfolio-list{ display:flex; flex-direction:column; gap: 20px; }
   .project{ padding: 26px; display:grid; grid-template-columns: 1fr auto; gap: 20px; align-items:center; transition: box-shadow .25s ease; }
   @media (max-width: 640px){ .project{ grid-template-columns: 1fr; } }
@@ -668,6 +731,7 @@
       <a href="#galerie" data-fr="Galerie" data-en="Gallery">Galerie</a>
       <a href="#carte" data-fr="Carte de visite" data-en="Business card">Carte de visite</a>
       <a href="#cv" data-fr="Mon CV" data-en="My résumé">Mon CV</a>
+      <a href="#actualites" data-fr="Actualités" data-en="News">Actualités</a>
       <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
       <a href="#autre" data-fr="Autre" data-en="Other">Autre</a>
     </div>
@@ -1006,6 +1070,17 @@
   </div>
 </section>
 
+<section class="section reveal" id="actualites">
+  <div class="section-head">
+    <div class="section-eyebrow" data-fr="Actualités" data-en="News">Actualités</div>
+    <h2 data-fr="Dernières publications" data-en="Latest posts">Dernières publications</h2>
+    <p data-fr="Nouvelles, photos et articles publiés récemment." data-en="Recently published news, photos and articles.">Nouvelles, photos et articles publiés récemment.</p>
+  </div>
+  <div id="posts-list" class="posts-grid">
+    <p class="posts-empty" data-fr="Chargement…" data-en="Loading…">Chargement…</p>
+  </div>
+</section>
+
 <section class="section reveal" id="contact">
   <div class="section-head">
     <div class="section-eyebrow" data-fr="Contact" data-en="Contact">Contact</div>
@@ -1131,7 +1206,53 @@
   <div class="thanks-msg" data-fr="✦ Merci d'avoir visité mon site — j'espère qu'il vous a plu ! N'hésitez pas à me contacter pour votre prochain projet. ✦" data-en="✦ Thank you for visiting my site — I hope you enjoyed it! Feel free to reach out for your next project. ✦">✦ Merci d'avoir visité mon site — j'espère qu'il vous a plu ! N'hésitez pas à me contacter pour votre prochain projet. ✦</div>
   <div data-fr="© 2026 Nyah_ITProg — Fy ANDRIANANTENAINA, IT Programmeur" data-en="© 2026 Nyah_ITProg — Fy ANDRIANANTENAINA, IT Programmer">© 2026 Nyah_ITProg — Fy ANDRIANANTENAINA, IT Programmeur</div>
   <div>Moramanga, Madagascar</div>
+  <div class="admin-link-wrap"><button id="admin-link-btn" class="admin-link-btn" data-fr="Accès admin" data-en="Admin access">Accès admin</button></div>
 </footer>
+
+<div id="admin-modal-overlay" class="admin-overlay" style="display:none;">
+  <div class="admin-modal glass">
+    <button class="admin-close" id="admin-login-close" aria-label="Fermer">✕</button>
+    <h3 data-fr="Accès administrateur" data-en="Admin access">Accès administrateur</h3>
+    <p data-fr="Entrez le code pour publier du contenu." data-en="Enter the code to publish content.">Entrez le code pour publier du contenu.</p>
+    <input type="password" id="admin-code-input" class="admin-input" placeholder="Code" autocomplete="off" />
+    <button id="admin-login-submit" class="btn btn-primary" style="width:100%;margin-top:12px;" data-fr="Se connecter" data-en="Log in">Se connecter</button>
+    <p id="admin-login-error" class="admin-error" style="display:none;" data-fr="Code incorrect." data-en="Incorrect code.">Code incorrect.</p>
+  </div>
+</div>
+
+<div id="admin-panel-overlay" class="admin-overlay" style="display:none;">
+  <div class="admin-modal admin-editor glass">
+    <button class="admin-close" id="admin-panel-close" aria-label="Fermer">✕</button>
+    <h3 data-fr="Publier une actualité" data-en="Publish a post">Publier une actualité</h3>
+
+    <input type="text" id="post-title-input" class="admin-input" placeholder="Titre de l'article" />
+
+    <div class="editor-toolbar">
+      <button type="button" data-cmd="bold" title="Gras"><b>G</b></button>
+      <button type="button" data-cmd="italic" title="Italique"><i>I</i></button>
+      <button type="button" data-cmd="underline" title="Souligné"><u>S</u></button>
+      <select id="font-size-select" title="Taille de police">
+        <option value="2">Petit</option>
+        <option value="3" selected>Normal</option>
+        <option value="5">Grand</option>
+        <option value="7">Très grand</option>
+      </select>
+      <input type="color" id="text-color-input" title="Couleur du texte" value="#111827" />
+    </div>
+    <div id="post-editor" class="post-editor" contenteditable="true" data-placeholder="Écrivez votre article ici…"></div>
+
+    <label class="admin-file-label" for="post-photo-input" data-fr="📷 Ajouter une photo (optionnel)" data-en="📷 Add a photo (optional)">📷 Ajouter une photo (optionnel)</label>
+    <input type="file" id="post-photo-input" accept="image/*" style="display:none;" />
+    <img id="post-photo-preview" style="display:none;max-width:100%;border-radius:12px;margin-top:10px;" />
+
+    <button id="post-publish-btn" class="btn btn-primary" style="width:100%;margin-top:16px;" data-fr="Publier" data-en="Publish">Publier</button>
+    <p id="post-publish-status" class="admin-error" style="display:none;"></p>
+
+    <div class="admin-panel-divider"></div>
+    <h4 style="font-size:14px;margin-bottom:10px;" data-fr="Mes publications" data-en="My posts">Mes publications</h4>
+    <div id="admin-posts-list"></div>
+  </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
@@ -1372,6 +1493,222 @@ document.addEventListener('DOMContentLoaded', function(){
     btn.addEventListener('click', function(){ setTimeout(updateDefaultCard, 0); });
   });
 });
+</script>
+
+<script>
+// ============ Actualités : affichage public + panneau admin ============
+(function(){
+  var ADMIN_TOKEN_KEY = 'nyah-admin-token';
+
+  function esc(s){
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+  function fmtDate(ts){
+    try{ return new Date(ts).toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' }); }
+    catch(e){ return ''; }
+  }
+
+  function renderPublicPosts(posts){
+    var list = document.getElementById('posts-list');
+    if(!list) return;
+    if(!posts || posts.length === 0){
+      list.innerHTML = '<p class="posts-empty" data-fr="Aucune publication pour le moment." data-en="No posts yet.">Aucune publication pour le moment.</p>';
+      return;
+    }
+    list.innerHTML = posts.map(function(p){
+      return '<div class="glass post-card">' +
+        (p.photo ? '<img src="' + p.photo + '" alt="" loading="lazy" />' : '') +
+        (p.title ? '<h3>' + esc(p.title) + '</h3>' : '') +
+        '<div class="post-body">' + p.html + '</div>' +
+        '<div class="post-date">' + fmtDate(p.createdAt) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function loadPosts(){
+    fetch('/api/posts').then(function(r){ return r.json(); }).then(function(data){
+      renderPublicPosts(data.posts || []);
+      renderAdminPostsList(data.posts || []);
+    }).catch(function(){
+      var list = document.getElementById('posts-list');
+      if(list) list.innerHTML = '<p class="posts-empty">—</p>';
+    });
+  }
+
+  function renderAdminPostsList(posts){
+    var box = document.getElementById('admin-posts-list');
+    if(!box) return;
+    if(!posts.length){ box.innerHTML = '<p style="font-size:12.5px;color:var(--text-dim);">Aucune publication.</p>'; return; }
+    box.innerHTML = posts.map(function(p){
+      return '<div class="admin-post-row"><span>' + esc(p.title || '(sans titre)') + '</span>' +
+        '<button data-del-id="' + p.id + '">Supprimer</button></div>';
+    }).join('');
+    box.querySelectorAll('[data-del-id]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-del-id');
+        var token = localStorage.getItem(ADMIN_TOKEN_KEY);
+        if(!token) return;
+        btn.disabled = true;
+        fetch('/api/posts?id=' + encodeURIComponent(id), {
+          method: 'DELETE',
+          headers: { 'Authorization': 'Bearer ' + token }
+        }).then(function(){ loadPosts(); });
+      });
+    });
+  }
+
+  loadPosts();
+
+  // --- Modales ---
+  var loginOverlay = document.getElementById('admin-modal-overlay');
+  var panelOverlay = document.getElementById('admin-panel-overlay');
+  var adminLinkBtn = document.getElementById('admin-link-btn');
+  var loginClose = document.getElementById('admin-login-close');
+  var panelClose = document.getElementById('admin-panel-close');
+  var codeInput = document.getElementById('admin-code-input');
+  var loginSubmit = document.getElementById('admin-login-submit');
+  var loginError = document.getElementById('admin-login-error');
+
+  function openPanel(){
+    if(loginOverlay) loginOverlay.style.display = 'none';
+    if(panelOverlay) panelOverlay.style.display = 'flex';
+    loadPosts();
+  }
+
+  if(adminLinkBtn){
+    adminLinkBtn.addEventListener('click', function(){
+      var existingToken = localStorage.getItem(ADMIN_TOKEN_KEY);
+      if(existingToken){ openPanel(); }
+      else if(loginOverlay){ loginOverlay.style.display = 'flex'; if(codeInput) codeInput.focus(); }
+    });
+  }
+  if(loginClose) loginClose.addEventListener('click', function(){ loginOverlay.style.display = 'none'; });
+  if(panelClose) panelClose.addEventListener('click', function(){ panelOverlay.style.display = 'none'; });
+  [loginOverlay, panelOverlay].forEach(function(ov){
+    if(!ov) return;
+    ov.addEventListener('click', function(e){ if(e.target === ov) ov.style.display = 'none'; });
+  });
+
+  function doLogin(){
+    var code = codeInput ? codeInput.value.trim() : '';
+    if(!code) return;
+    if(loginError) loginError.style.display = 'none';
+    fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: code })
+    }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, data: d }; }); })
+      .then(function(res){
+        if(res.ok && res.data.token){
+          localStorage.setItem(ADMIN_TOKEN_KEY, res.data.token);
+          if(codeInput) codeInput.value = '';
+          openPanel();
+        } else {
+          if(loginError) loginError.style.display = '';
+        }
+      }).catch(function(){ if(loginError) loginError.style.display = ''; });
+  }
+  if(loginSubmit) loginSubmit.addEventListener('click', doLogin);
+  if(codeInput) codeInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') doLogin(); });
+
+  // --- Éditeur riche ---
+  var editor = document.getElementById('post-editor');
+  document.querySelectorAll('.editor-toolbar [data-cmd]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.execCommand(btn.getAttribute('data-cmd'), false, null);
+      editor.focus();
+    });
+  });
+  var fontSizeSelect = document.getElementById('font-size-select');
+  if(fontSizeSelect){
+    fontSizeSelect.addEventListener('change', function(){
+      document.execCommand('fontSize', false, fontSizeSelect.value);
+      editor.focus();
+    });
+  }
+  var colorInput = document.getElementById('text-color-input');
+  if(colorInput){
+    colorInput.addEventListener('input', function(){
+      document.execCommand('foreColor', false, colorInput.value);
+      editor.focus();
+    });
+  }
+
+  // --- Photo (compression + aperçu) ---
+  var photoInput = document.getElementById('post-photo-input');
+  var photoPreview = document.getElementById('post-photo-preview');
+  var currentPhotoData = null;
+  if(photoInput){
+    photoInput.addEventListener('change', function(){
+      var file = photoInput.files[0];
+      if(!file) return;
+      var img = new Image();
+      var reader = new FileReader();
+      reader.onload = function(e){
+        img.onload = function(){
+          var canvas = document.createElement('canvas');
+          var maxDim = 1100;
+          var w = img.width, h = img.height;
+          if(Math.max(w,h) > maxDim){
+            var ratio = maxDim / Math.max(w,h);
+            w = Math.round(w*ratio); h = Math.round(h*ratio);
+          }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          currentPhotoData = canvas.toDataURL('image/jpeg', 0.8);
+          photoPreview.src = currentPhotoData;
+          photoPreview.style.display = '';
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // --- Publication ---
+  var publishBtn = document.getElementById('post-publish-btn');
+  var publishStatus = document.getElementById('post-publish-status');
+  var titleInput = document.getElementById('post-title-input');
+
+  if(publishBtn){
+    publishBtn.addEventListener('click', function(){
+      var token = localStorage.getItem(ADMIN_TOKEN_KEY);
+      if(!token){ if(loginOverlay){ panelOverlay.style.display='none'; loginOverlay.style.display = 'flex'; } return; }
+      var title = titleInput ? titleInput.value.trim() : '';
+      var html = editor ? editor.innerHTML.trim() : '';
+      if(!title && !html && !currentPhotoData){
+        if(publishStatus){ publishStatus.textContent = 'Ajoutez un titre, un texte ou une photo.'; publishStatus.style.display = ''; }
+        return;
+      }
+      publishBtn.disabled = true;
+      publishBtn.textContent = 'Publication…';
+      fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ title: title, html: html, photo: currentPhotoData || '' })
+      }).then(function(r){
+        if(r.status === 401){ localStorage.removeItem(ADMIN_TOKEN_KEY); throw new Error('unauthorized'); }
+        return r.json();
+      }).then(function(){
+        if(titleInput) titleInput.value = '';
+        if(editor) editor.innerHTML = '';
+        if(photoPreview){ photoPreview.style.display = 'none'; photoPreview.src=''; }
+        currentPhotoData = null;
+        if(publishStatus){ publishStatus.style.display = 'none'; }
+        loadPosts();
+      }).catch(function(){
+        if(publishStatus){ publishStatus.textContent = 'Session expirée, reconnectez-vous.'; publishStatus.style.display = ''; }
+        panelOverlay.style.display = 'none';
+        if(loginOverlay) loginOverlay.style.display = 'flex';
+      }).finally(function(){
+        publishBtn.disabled = false;
+        publishBtn.textContent = 'Publier';
+      });
+    });
+  }
+})();
 </script>
 </body>
 </html>
